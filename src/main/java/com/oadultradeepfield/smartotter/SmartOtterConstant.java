@@ -6,6 +6,11 @@ package com.oadultradeepfield.smartotter;
  */
 public final class SmartOtterConstant {
     /**
+     * Command to list all tasks
+     */
+    public static final String LIST_COMMAND = "list";
+
+    /**
      * Command to exit the application
      */
     public static final String BYE_COMMAND = "bye";
