@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.task.Task;
-
 import java.util.List;
 
 /**
@@ -9,5 +8,4 @@ import java.util.List;
  *
  * @param tasks the list of tasks
  */
-public record CommandContext(List<Task> tasks) {
-}
+public record CommandContext(List<Task> tasks) {}
