@@ -25,15 +25,6 @@ public class SmartOtter {
         CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);
     }
 
-    private static void respondToUser(String input) {
-        try {
-            Command command = parser.parse(input);
-            command.execute(context);
-        } catch (IllegalArgumentException e) {
-            CustomIO.printPretty(e.getMessage());
-        }
-    }
-
     /**
      * Entry point. Runs interactive loop until user exits.
      */

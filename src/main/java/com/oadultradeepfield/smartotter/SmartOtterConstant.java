@@ -5,21 +5,6 @@ package com.oadultradeepfield.smartotter;
  * This class cannot be instantiated.
  */
 public final class SmartOtterConstant {
-    /**
-     * Command to list all tasks
-     */
-    public static final String LIST_COMMAND = "list";
-
-    /**
-     * Command to mark task as done
-     */
-    public static final String MARK_COMMAND = "mark";
-
-    /**
-     * Command to exit the application
-     */
-    public static final String BYE_COMMAND = "bye";
-
     public static final String APP_NAME = "SmartOtter 🦦📚";
     public static final String HORIZONTAL_BAR = "____________________________________________________________";
 
