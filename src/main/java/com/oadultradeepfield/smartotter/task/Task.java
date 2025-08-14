@@ -16,15 +16,6 @@ public class Task {
   }
 
   /**
-   * Returns the name of this task.
-   *
-   * @return the task name
-   */
-  public String getTaskName() {
-    return taskName;
-  }
-
-  /**
    * Sets the completion status of this task.
    *
    * @param isDone {@code true} if the task is done, {@code false} otherwise
