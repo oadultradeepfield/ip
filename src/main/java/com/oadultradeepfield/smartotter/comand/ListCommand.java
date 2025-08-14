@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ListCommand implements Command {
+    @SuppressWarnings("unused")
     public static Command fromInput(String input) throws IllegalArgumentException {
         return new ListCommand();
     }

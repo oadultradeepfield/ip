@@ -4,17 +4,17 @@ public class Task {
     private final String taskName;
     private boolean isDone;
 
-    public Task(String taskName, boolean isDone) {
+    public Task(String taskName) {
         this.taskName = taskName;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

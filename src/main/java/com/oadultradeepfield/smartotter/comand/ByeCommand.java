@@ -4,6 +4,7 @@ import com.oadultradeepfield.smartotter.SmartOtterConstant;
 import com.oadultradeepfield.smartotter.utility.CustomIO;
 
 public class ByeCommand implements Command {
+    @SuppressWarnings("unused")
     public static Command fromInput(String input) throws IllegalArgumentException {
         return new ByeCommand();
     }
