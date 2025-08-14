@@ -41,8 +41,8 @@ public class SmartOtter {
                 if (command instanceof ByeCommand) {
                     break;
                 }
-            } catch (NoSuchElementException | IllegalStateException e) {
-                CustomIO.printPretty(e.getMessage());
+            } catch (NoSuchElementException | IllegalStateException | IllegalArgumentException e) {
+                CustomIO.printError(e.getMessage());
             }
         }
     }

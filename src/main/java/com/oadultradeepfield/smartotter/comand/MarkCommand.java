@@ -45,9 +45,9 @@ public class MarkCommand implements Command {
         if (taskNumber >= 1 && taskNumber <= tasks.size()) {
             Task task = tasks.get(taskNumber - 1);
             task.setDone(true);
-            CustomIO.printPretty("Great work! I have marked " + task.getTaskName() + " as done.");
+            CustomIO.printPretty("Great work! I have marked '" + task.getTaskName() + "' as done.");
         } else {
-            CustomIO.printError("Invalid task number");
+            CustomIO.printError("There is no task with number " + taskNumber);
         }
     }
 }

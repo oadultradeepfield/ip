@@ -32,14 +32,30 @@ public class CommandParser {
      * @throws IllegalArgumentException if the input is invalid for the matched command
      */
     public Command parse(String input) throws IllegalArgumentException {
-        String[] parts = input.split(" ");
+        String[] parts = input.split(" ", 2); // Split into maximum 2 parts
         String commandWord = parts[0].toLowerCase();
+
+        // Special case: "list something" or "bye someone" should be treated as add command
+        if ((commandWord.equals("list") || commandWord.equals("bye")) && parts.length > 1) {
+            return new AddCommand(input);
+        }
+
         CommandFactory factory = commandFactories.get(commandWord);
 
         if (factory != null) {
-            return factory.create(input);
+            // Handle commands that don't need parameters (bye, list)
+            if (commandWord.equals("bye") || commandWord.equals("list")) {
+                return factory.create("");
+            }
+
+            if (parts.length > 1) {
+                return factory.create(parts[1]);
+            }
+
+            throw new IllegalArgumentException("Command '" + commandWord + "' requires one argument");
         }
 
+        // Default to AddCommand for unrecognized commands
         return new AddCommand(input);
     }
 

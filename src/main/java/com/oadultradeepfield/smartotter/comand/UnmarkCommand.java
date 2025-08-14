@@ -45,9 +45,9 @@ public class UnmarkCommand implements Command {
         if (taskNumber >= 1 && taskNumber <= tasks.size()) {
             Task task = tasks.get(taskNumber - 1);
             task.setDone(false);
-            CustomIO.printPretty("Great work! I have marked " + task.getTaskName() + " as not done.");
+            CustomIO.printPretty("Understand! I have marked '" + task.getTaskName() + "' as not done.");
         } else {
-            CustomIO.printError("Invalid task number");
+            CustomIO.printError("There is no task with number" + taskNumber);
         }
     }
 }

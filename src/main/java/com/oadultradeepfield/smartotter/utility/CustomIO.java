@@ -38,6 +38,6 @@ public class CustomIO {
      * @param input the error message to display
      */
     public static void printError(String input) {
-        printPretty("⛔️ Error: " + input);
+        printPretty("⛔️ Error - " + input);
     }
 }
