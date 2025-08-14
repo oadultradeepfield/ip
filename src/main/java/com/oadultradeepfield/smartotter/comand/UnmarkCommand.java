@@ -1,21 +1,17 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
 
 /** Marks a specified task as not done. */
-public class UnmarkCommand implements Command {
-  private final int taskNumber;
-
+public record UnmarkCommand(int taskNumber) implements Command {
   /**
    * Creates an {@code UnmarkCommand} for the given task number.
    *
    * @param taskNumber the 1-based index of the task to unmark
    */
-  public UnmarkCommand(int taskNumber) {
-    this.taskNumber = taskNumber;
-  }
+  public UnmarkCommand {}
 
   /**
    * Parses input to create an {@code UnmarkCommand}.

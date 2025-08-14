@@ -1,7 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

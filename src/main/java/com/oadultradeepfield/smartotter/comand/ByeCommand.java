@@ -1,7 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.SmartOtterConstant;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 
 /** A command that displays the farewell message and ends the session. */
 public class ByeCommand implements Command {

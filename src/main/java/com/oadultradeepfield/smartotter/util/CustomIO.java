@@ -1,4 +1,4 @@
-package com.oadultradeepfield.smartotter.utility;
+package com.oadultradeepfield.smartotter.util;
 
 import com.oadultradeepfield.smartotter.SmartOtterConstant;
 

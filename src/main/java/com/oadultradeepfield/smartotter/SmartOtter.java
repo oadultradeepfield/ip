@@ -5,7 +5,7 @@ import com.oadultradeepfield.smartotter.comand.Command;
 import com.oadultradeepfield.smartotter.comand.CommandContext;
 import com.oadultradeepfield.smartotter.comand.CommandParser;
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;

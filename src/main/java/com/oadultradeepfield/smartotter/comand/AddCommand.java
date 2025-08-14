@@ -1,7 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 
 /** A command that adds a new task to the task list. */
 public class AddCommand implements Command {

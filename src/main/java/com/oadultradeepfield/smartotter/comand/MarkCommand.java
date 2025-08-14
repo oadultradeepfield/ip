@@ -1,21 +1,17 @@
 package com.oadultradeepfield.smartotter.comand;
 
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.utility.CustomIO;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
 
 /** Marks a specified task as done. */
-public class MarkCommand implements Command {
-  private final int taskNumber;
-
+public record MarkCommand(int taskNumber) implements Command {
   /**
    * Creates a {@code MarkCommand} for the given task number.
    *
    * @param taskNumber the 1-based index of the task to mark as done
    */
-  public MarkCommand(int taskNumber) {
-    this.taskNumber = taskNumber;
-  }
+  public MarkCommand {}
 
   /**
    * Parses input to create a {@code MarkCommand}.
