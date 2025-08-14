@@ -31,7 +31,7 @@ public class SmartOtter {
     public static void main(String[] args) {
         greeting();
 
-        String input = "";
+        String input;
         while (true) {
             try {
                 input = CustomIO.sanitizeInput(scanner.nextLine());

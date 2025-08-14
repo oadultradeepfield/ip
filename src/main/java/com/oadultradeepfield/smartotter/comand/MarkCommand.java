@@ -5,13 +5,28 @@ import com.oadultradeepfield.smartotter.utility.CustomIO;
 
 import java.util.List;
 
+/**
+ * Marks a specified task as done.
+ */
 public class MarkCommand implements Command {
     private final int taskNumber;
 
+    /**
+     * Creates a {@code MarkCommand} for the given task number.
+     *
+     * @param taskNumber the 1-based index of the task to mark as done
+     */
     public MarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Parses input to create a {@code MarkCommand}.
+     *
+     * @param taskNumber string representing the 1-based task number
+     * @return a new {@code MarkCommand} instance
+     * @throws IllegalArgumentException if the input is not a valid integer
+     */
     public static Command fromInput(String taskNumber) throws IllegalArgumentException {
         try {
             int num = Integer.parseInt(taskNumber);
@@ -21,6 +36,9 @@ public class MarkCommand implements Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(CommandContext context) {
         List<Task> tasks = context.tasks();
