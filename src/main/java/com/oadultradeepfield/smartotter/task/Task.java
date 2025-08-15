@@ -1,7 +1,7 @@
 package com.oadultradeepfield.smartotter.task;
 
 /** Represents a task with a name and completion status. */
-public class Task {
+public abstract class Task {
   private final String taskName;
   private boolean isDone;
 
@@ -24,6 +24,10 @@ public class Task {
     this.isDone = isDone;
   }
 
+  public String getIcon() {
+    return isDone ? "[X]" : "[ ]";
+  }
+
   /**
    * Returns a string representation of the task, showing its completion status in the format:
    *
@@ -39,10 +43,6 @@ public class Task {
    */
   @Override
   public String toString() {
-    if (isDone) {
-      return "[X] " + taskName;
-    } else {
-      return "[ ] " + taskName;
-    }
+    return getIcon() + " " + taskName;
   }
 }
