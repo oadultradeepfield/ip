@@ -13,10 +13,9 @@ public class ListCommand implements Executable {
    *
    * @param input unused input string
    * @return a new {@code ListCommand} instance
-   * @throws IllegalArgumentException never thrown in this implementation
    */
   @SuppressWarnings("unused")
-  public static Executable fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) {
     return new ListCommand();
   }
 

@@ -19,7 +19,7 @@ public final class AddTodoCommand extends AddTaskCommand {
    * @param taskName string representing the task name
    * @return a new {@code AddTodoCommand} instance
    */
-  public static Executable fromInput(String taskName) throws IllegalArgumentException {
+  public static Executable fromInput(String taskName) {
     return new AddTodoCommand(taskName);
   }
 }

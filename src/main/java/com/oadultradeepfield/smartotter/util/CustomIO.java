@@ -31,11 +31,11 @@ public class CustomIO {
   }
 
   /**
-   * Prints error messages using the pretty format with error prefix.
+   * Get error messages with emoji prefix.
    *
    * @param input the error message to display
    */
-  public static void printError(String input) {
-    printPretty("😵‍💫 Oops! - %s".formatted(input));
+  public static String formatError(String input) {
+    return "😵‍💫 Oops! - %s".formatted(input);
   }
 }

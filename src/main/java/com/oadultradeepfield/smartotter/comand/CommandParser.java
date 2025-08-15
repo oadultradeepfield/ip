@@ -1,5 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
+
 /** Parses user input into corresponding {@link Executable} instances. */
 public class CommandParser {
   /**
@@ -7,10 +9,10 @@ public class CommandParser {
    *
    * @param input the raw user input
    * @return the parsed command
-   * @throws IllegalArgumentException if the input is not an available command or the arguments are
+   * @throws SmartOtterException if the input is not an available command or the arguments are
    *     invalid for the matched command
    */
-  public Executable parse(String input) {
+  public Executable parse(String input) throws SmartOtterException {
     String[] parts = input.split(" ", 2); // Split into maximum 2 parts;
     String commandWord = parts[0].toLowerCase();
 
@@ -28,11 +30,10 @@ public class CommandParser {
       if (parts.length > 1) {
         return type.create(parts[1]);
       }
-      throw new IllegalArgumentException(
-          "Command '%s' requires one argument".formatted(commandWord));
+      throw new SmartOtterException("Command '%s' requires one argument".formatted(commandWord));
     }
 
-    throw new IllegalArgumentException(
+    throw new SmartOtterException(
         "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
             .formatted(commandWord));
   }

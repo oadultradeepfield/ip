@@ -1,5 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
@@ -18,14 +19,14 @@ public record DeleteCommand(int taskNumber) implements Executable {
    *
    * @param taskNumber string representing the 1-based task number
    * @return a new {@code DeleteCommand} instance
-   * @throws IllegalArgumentException if the input is not a valid integer
+   * @throws SmartOtterException if the input is not a valid integer
    */
-  public static Executable fromInput(String taskNumber) throws IllegalArgumentException {
+  public static Executable fromInput(String taskNumber) throws SmartOtterException {
     try {
       int num = Integer.parseInt(taskNumber);
       return new DeleteCommand(num);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("Invalid task number: %s".formatted(taskNumber));
+      throw new SmartOtterException("Invalid task number: %s".formatted(taskNumber));
     }
   }
 
@@ -41,11 +42,12 @@ public record DeleteCommand(int taskNumber) implements Executable {
           """
                         Got it! I have deleted the task:
                             %s
-                        Now you have %d tasks, namely"""
+                        Now you have %d tasks left."""
               .formatted(task, context.tasks().size());
       CustomIO.printPretty(message);
     } else {
-      CustomIO.printError("There is no task with number %d".formatted(taskNumber));
+      CustomIO.printPretty(
+          CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
     }
   }
 }

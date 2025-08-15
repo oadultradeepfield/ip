@@ -1,5 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
@@ -18,14 +19,14 @@ public record MarkCommand(int taskNumber) implements Executable {
    *
    * @param taskNumber string representing the 1-based task number
    * @return a new {@code MarkCommand} instance
-   * @throws IllegalArgumentException if the input is not a valid integer
+   * @throws SmartOtterException if the input is not a valid integer
    */
-  public static Executable fromInput(String taskNumber) throws IllegalArgumentException {
+  public static Executable fromInput(String taskNumber) throws SmartOtterException {
     try {
       int num = Integer.parseInt(taskNumber);
       return new MarkCommand(num);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("Invalid task number: %s".formatted(taskNumber));
+      throw new SmartOtterException("Invalid task number: %s".formatted(taskNumber));
     }
   }
 
@@ -38,7 +39,8 @@ public record MarkCommand(int taskNumber) implements Executable {
       task.setDone(true);
       CustomIO.printPretty("Great work! I have marked the task as done!\n%s".formatted(task));
     } else {
-      CustomIO.printError("There is no task with number %d".formatted(taskNumber));
+      CustomIO.printPretty(
+          CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
     }
   }
 }

@@ -1,5 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.DeadlineTask;
 
 /** A command that adds a new deadline task to the task list. */
@@ -21,18 +22,17 @@ public final class AddDeadlineTaskCommand extends AddTaskCommand {
    *
    * @param input the full user input string without the command word
    * @return a new {@code AddDeadlineTaskCommand} instance
-   * @throws IllegalArgumentException if the input format is invalid
+   * @throws SmartOtterException the input format is invalid
    */
-  public static Executable fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) throws SmartOtterException {
     String[] parts = input.split("/by", 2);
     if (parts.length < 2) {
-      throw new IllegalArgumentException(
-          "Incorrect deadline format! Use: deadline <desc> /by <time>");
+      throw new SmartOtterException("Incorrect deadline format! Use: deadline <desc> /by <time>");
     }
     String taskName = parts[0].trim();
     String deadline = parts[1].trim();
     if (taskName.isEmpty() || deadline.isEmpty()) {
-      throw new IllegalArgumentException("Task name and deadline cannot be empty.");
+      throw new SmartOtterException("Task name and deadline cannot be empty");
     }
     return new AddDeadlineTaskCommand(taskName, deadline);
   }

@@ -10,10 +10,9 @@ public class ByeCommand implements Executable {
    *
    * @param input unused input string
    * @return a new {@code ByeCommand} instance
-   * @throws IllegalArgumentException never thrown in this implementation
    */
   @SuppressWarnings("unused")
-  public static Executable fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) {
     return new ByeCommand();
   }
 

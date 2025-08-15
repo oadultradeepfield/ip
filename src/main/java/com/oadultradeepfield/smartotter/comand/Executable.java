@@ -1,5 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
+
 /** Represents a user command that can be executed with a given context. */
 public interface Executable {
   /**
@@ -7,5 +9,5 @@ public interface Executable {
    *
    * @param context the execution context
    */
-  void execute(CommandContext context);
+  void execute(CommandContext context) throws SmartOtterException;
 }

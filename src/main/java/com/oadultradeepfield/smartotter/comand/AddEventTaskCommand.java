@@ -1,5 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.EventTask;
 
 /** A command that adds a new event task to the task list. */
@@ -22,26 +23,26 @@ public final class AddEventTaskCommand extends AddTaskCommand {
    *
    * @param input the full user input string without the command word
    * @return a new {@code AddEventTaskCommand} instance
-   * @throws IllegalArgumentException if the input format is invalid
+   * @throws SmartOtterException if the input format is invalid
    */
-  public static Executable fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) throws SmartOtterException {
     String[] fromSplit = input.split("/from", 2);
     if (fromSplit.length < 2) {
-      throw new IllegalArgumentException(
+      throw new SmartOtterException(
           "Incorrect event format! Use: event <desc> /from <start> /to <end>");
     }
     String taskName = fromSplit[0].trim();
 
     String[] toSplit = fromSplit[1].split("/to", 2);
     if (toSplit.length < 2) {
-      throw new IllegalArgumentException(
+      throw new SmartOtterException(
           "Incorrect event format! Use: event <desc> /from <start> /to <end>");
     }
     String from = toSplit[0].trim();
     String to = toSplit[1].trim();
 
     if (taskName.isEmpty() || from.isEmpty() || to.isEmpty()) {
-      throw new IllegalArgumentException("Task name, start, and end time cannot be empty.");
+      throw new SmartOtterException("Task name, start, and end time cannot be empty.");
     }
 
     return new AddEventTaskCommand(taskName, from, to);

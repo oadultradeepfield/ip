@@ -1,5 +1,6 @@
 package com.oadultradeepfield.smartotter.comand;
 
+import com.oadultradeepfield.smartotter.SmartOtterException;
 import java.util.Arrays;
 
 public enum CommandType {
@@ -27,12 +28,12 @@ public enum CommandType {
         .orElse(null);
   }
 
-  public Executable create(String input) {
+  public Executable create(String input) throws SmartOtterException {
     return factory.create(input);
   }
 
   @FunctionalInterface
   private interface CommandFactory {
-    Executable create(String input) throws IllegalArgumentException;
+    Executable create(String input) throws SmartOtterException;
   }
 }
