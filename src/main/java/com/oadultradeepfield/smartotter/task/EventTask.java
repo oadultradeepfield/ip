@@ -12,11 +12,11 @@ public class EventTask extends Task {
 
   @Override
   public String getIcon() {
-    return "[E] " + super.getIcon();
+    return "[E] %s".formatted(super.getIcon());
   }
 
   @Override
   public String toString() {
-    return super.toString() + "(from: " + this.dateFrom + ", to: " + this.dateTo + ")";
+    return "%s (from: %s, to: %s)".formatted(super.toString(), dateFrom, dateTo);
   }
 }

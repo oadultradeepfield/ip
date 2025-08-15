@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /** A command that lists all current tasks with their status. */
-public class ListCommand implements Command {
+public class ListCommand implements Executable {
   /**
    * Creates a {@code ListCommand} from user input. This command ignores any provided input.
    *
@@ -16,7 +16,7 @@ public class ListCommand implements Command {
    * @throws IllegalArgumentException never thrown in this implementation
    */
   @SuppressWarnings("unused")
-  public static Command fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) throws IllegalArgumentException {
     return new ListCommand();
   }
 

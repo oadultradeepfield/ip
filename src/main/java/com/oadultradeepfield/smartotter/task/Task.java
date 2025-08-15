@@ -43,6 +43,6 @@ public abstract class Task {
    */
   @Override
   public String toString() {
-    return getIcon() + " " + taskName;
+    return "%s %s".formatted(getIcon(), taskName);
   }
 }

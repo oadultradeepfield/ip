@@ -5,7 +5,7 @@ import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.List;
 
 /** Marks a specified task as not done. */
-public record UnmarkCommand(int taskNumber) implements Command {
+public record UnmarkCommand(int taskNumber) implements Executable {
   /**
    * Creates an {@code UnmarkCommand} for the given task number.
    *
@@ -20,12 +20,12 @@ public record UnmarkCommand(int taskNumber) implements Command {
    * @return a new {@code UnmarkCommand} instance
    * @throws IllegalArgumentException if the input is not a valid integer
    */
-  public static Command fromInput(String input) throws IllegalArgumentException {
+  public static Executable fromInput(String input) throws IllegalArgumentException {
     try {
       int num = Integer.parseInt(input);
       return new UnmarkCommand(num);
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("Invalid task number: " + input);
+      throw new IllegalArgumentException("Invalid task number: %s".formatted(input));
     }
   }
 
@@ -36,9 +36,9 @@ public record UnmarkCommand(int taskNumber) implements Command {
     if (taskNumber >= 1 && taskNumber <= tasks.size()) {
       Task task = tasks.get(taskNumber - 1);
       task.setDone(false);
-      CustomIO.printPretty("Got it! I have marked the task as not done\n" + task);
+      CustomIO.printPretty("Got it! I have marked the task as not done\n%s".formatted(task));
     } else {
-      CustomIO.printError("There is no task with number " + taskNumber);
+      CustomIO.printError("There is no task with number %d".formatted(taskNumber));
     }
   }
 }

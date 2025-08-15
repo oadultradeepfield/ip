@@ -25,7 +25,8 @@ public class CustomIO {
    */
   public static void printPretty(String input) {
     String formattedInput =
-        SmartOtterConstant.HORIZONTAL_BAR + "\n" + input + "\n" + SmartOtterConstant.HORIZONTAL_BAR;
+        "%s\n%s\n%s"
+            .formatted(SmartOtterConstant.HORIZONTAL_BAR, input, SmartOtterConstant.HORIZONTAL_BAR);
     System.out.println(formattedInput.indent(4));
   }
 
@@ -35,6 +36,6 @@ public class CustomIO {
    * @param input the error message to display
    */
   public static void printError(String input) {
-    printPretty("⛔️ Error - " + input);
+    printPretty("⛔️ Error - %s".formatted(input));
   }
 }

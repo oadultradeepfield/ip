@@ -1,9 +1,9 @@
 package com.oadultradeepfield.smartotter;
 
 import com.oadultradeepfield.smartotter.comand.ByeCommand;
-import com.oadultradeepfield.smartotter.comand.Command;
 import com.oadultradeepfield.smartotter.comand.CommandContext;
 import com.oadultradeepfield.smartotter.comand.CommandParser;
+import com.oadultradeepfield.smartotter.comand.Executable;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class SmartOtter {
     while (true) {
       try {
         input = CustomIO.sanitizeInput(scanner.nextLine());
-        Command command = parser.parse(input);
-        command.execute(context);
+        Executable executable = parser.parse(input);
+        executable.execute(context);
 
-        if (command instanceof ByeCommand) {
+        if (executable instanceof ByeCommand) {
           break;
         }
       } catch (NoSuchElementException | IllegalStateException | IllegalArgumentException e) {

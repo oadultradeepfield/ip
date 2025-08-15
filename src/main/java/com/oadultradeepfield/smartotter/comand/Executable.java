@@ -1,7 +1,7 @@
 package com.oadultradeepfield.smartotter.comand;
 
 /** Represents a user command that can be executed with a given context. */
-public interface Command {
+public interface Executable {
   /**
    * Executes the command using the provided context.
    *

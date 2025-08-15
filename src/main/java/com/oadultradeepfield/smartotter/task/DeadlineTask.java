@@ -10,11 +10,11 @@ public class DeadlineTask extends Task {
 
   @Override
   public String getIcon() {
-    return "[D] " + super.getIcon();
+    return "[D] %s".formatted(super.getIcon());
   }
 
   @Override
   public String toString() {
-    return super.toString() + "(by: " + deadline + ")";
+    return "%s (by: %s)".formatted(super.toString(), deadline);
   }
 }

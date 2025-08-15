@@ -7,6 +7,6 @@ public class ToDoTask extends Task {
 
   @Override
   public String getIcon() {
-    return "[T] " + super.getIcon();
+    return "[T] %s".formatted(super.getIcon());
   }
 }
