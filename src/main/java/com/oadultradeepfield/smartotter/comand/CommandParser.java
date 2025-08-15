@@ -11,7 +11,7 @@ public class CommandParser {
    *     invalid for the matched command
    */
   public Executable parse(String input) {
-    String[] parts = input.split(" ", 2);
+    String[] parts = input.split(" ", 2); // Split into maximum 2 parts;
     String commandWord = parts[0].toLowerCase();
 
     CommandType type = CommandType.fromKeyword(commandWord);

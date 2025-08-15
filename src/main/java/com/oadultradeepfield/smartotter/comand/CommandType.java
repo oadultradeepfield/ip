@@ -9,7 +9,8 @@ public enum CommandType {
   LIST("list", ListCommand::fromInput),
   BYE("bye", ByeCommand::fromInput),
   MARK("mark", MarkCommand::fromInput),
-  UNMARK("unmark", UnmarkCommand::fromInput);
+  UNMARK("unmark", UnmarkCommand::fromInput),
+  DELETE("delete", DeleteCommand::fromInput);
 
   private final String keyword;
   private final CommandFactory factory;
@@ -31,7 +32,7 @@ public enum CommandType {
   }
 
   @FunctionalInterface
-  public interface CommandFactory {
+  private interface CommandFactory {
     Executable create(String input) throws IllegalArgumentException;
   }
 }

@@ -18,13 +18,9 @@ public class SmartOtter {
   private static final CommandContext context = new CommandContext(tasks);
   private static final Scanner scanner = new Scanner(System.in);
 
-  private static void greeting() {
-    CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);
-  }
-
   /** Entry point. Runs interactive loop until user exits. */
   public static void main(String[] args) {
-    greeting();
+    CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);
 
     String input;
     while (true) {
