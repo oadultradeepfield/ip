@@ -27,7 +27,8 @@ public final class AddDeadlineTaskCommand extends AddTaskCommand {
   public static Executable fromInput(String input) throws SmartOtterException {
     String[] parts = input.split("/by", 2);
     if (parts.length < 2) {
-      throw new SmartOtterException("Incorrect deadline format! Use: deadline <desc> /by <time>");
+      throw new SmartOtterException(
+          "Incorrect deadline format! Use: deadline <taskName> /by <time>");
     }
     String taskName = parts[0].trim();
     String deadline = parts[1].trim();
