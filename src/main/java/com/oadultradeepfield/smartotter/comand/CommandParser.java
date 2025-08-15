@@ -14,6 +14,8 @@ public class CommandParser {
   /** Registers the built-in commands. */
   private void registerCommands() {
     commandFactories.put("todo", AddTodoCommand::fromInput);
+    commandFactories.put("deadline", AddDeadlineTaskCommand::fromInput);
+    commandFactories.put("event", AddEventTaskCommand::fromInput);
     commandFactories.put("list", ListCommand::fromInput);
     commandFactories.put("bye", ByeCommand::fromInput);
     commandFactories.put("mark", MarkCommand::fromInput);
