@@ -1,4 +1,4 @@
-package com.oadultradeepfield.smartotter.comand;
+package com.oadultradeepfield.smartotter.command;
 
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;

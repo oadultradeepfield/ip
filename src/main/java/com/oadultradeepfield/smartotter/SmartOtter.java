@@ -1,9 +1,9 @@
 package com.oadultradeepfield.smartotter;
 
-import com.oadultradeepfield.smartotter.comand.ByeCommand;
-import com.oadultradeepfield.smartotter.comand.CommandContext;
-import com.oadultradeepfield.smartotter.comand.CommandParser;
-import com.oadultradeepfield.smartotter.comand.Executable;
+import com.oadultradeepfield.smartotter.command.ByeCommand;
+import com.oadultradeepfield.smartotter.command.CommandContext;
+import com.oadultradeepfield.smartotter.command.CommandParser;
+import com.oadultradeepfield.smartotter.command.Executable;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.ArrayList;
