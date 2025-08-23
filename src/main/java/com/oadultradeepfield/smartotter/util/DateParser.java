@@ -51,4 +51,18 @@ public class DateParser {
       return dateTime.format(OUTPUT_WITH_TIME);
     }
   }
+
+  /**
+   * Formats a {@link LocalDateTime} into the original input-style string.
+   *
+   * @param dateTime the {@link LocalDateTime} to format
+   * @return a string in the input format, e.g., "2/12/2019" or "2/12/2019 1800"
+   */
+  public static String formatForLine(LocalDateTime dateTime) {
+    if (dateTime.getHour() == 0 && dateTime.getMinute() == 0) {
+      return dateTime.format(INPUT_DATE_ONLY);
+    } else {
+      return dateTime.format(INPUT_WIH_TIME);
+    }
+  }
 }
