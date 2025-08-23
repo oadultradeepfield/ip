@@ -17,4 +17,10 @@ public class ToDoTask extends Task {
   public String getIcon() {
     return "[T] %s".formatted(super.getIcon());
   }
+
+  /** {@inheritDoc} */
+  @Override
+  public String convertToLine() {
+    return "T | %s".formatted(super.convertToLine());
+  }
 }

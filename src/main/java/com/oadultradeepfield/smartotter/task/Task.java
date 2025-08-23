@@ -45,4 +45,13 @@ public abstract class Task {
   public String toString() {
     return "%s %s".formatted(getIcon(), taskName);
   }
+
+  /**
+   * Convert a task to its line representation for saving as text file
+   *
+   * @return a line representation of a task
+   */
+  public String convertToLine() {
+    return "%s | %s".formatted(isDone ? "1" : "0", taskName);
+  }
 }
