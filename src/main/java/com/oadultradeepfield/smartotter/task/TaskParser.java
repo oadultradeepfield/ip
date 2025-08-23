@@ -16,7 +16,7 @@ public class TaskParser {
    * @return the parsed {@link Task}
    * @throws SmartOtterException if the line is invalid or cannot be parsed
    */
-  public static Task parse(String line) throws SmartOtterException {
+  public static Optional<Task> parse(String line) throws SmartOtterException {
     // Split by " | "
     String[] parts = line.split("\\s*\\|\\s*");
 
@@ -74,7 +74,7 @@ public class TaskParser {
    * @param deadlineOrTo the end time (for Event), may be {@code null}
    * @return the created {@link Task}, or {@code null} if type is unknown
    */
-  public static Task createTask(
+  public static Optional<Task> createTask(
       String type,
       int status,
       String taskName,
@@ -92,6 +92,6 @@ public class TaskParser {
       task.setDone(true);
     }
 
-    return task;
+    return Optional.ofNullable(task);
   }
 }
