@@ -54,8 +54,8 @@ public final class AddEventTaskCommand extends AddTaskCommand {
       throw new SmartOtterException("Start and end time is not in a valid date and time format.");
     }
 
-    if (parsedTo.get().isBefore(parsedFrom.get())) {
-      throw new SmartOtterException("Start time cannot be after end time.");
+    if (parsedTo.get().isBefore(parsedFrom.get()) || parsedTo.get().isEqual(parsedFrom.get())) {
+      throw new SmartOtterException("Start time must be before end time.");
     }
 
     return new AddEventTaskCommand(taskName, parsedFrom.get(), parsedTo.get());

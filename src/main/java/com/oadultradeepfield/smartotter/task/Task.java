@@ -54,4 +54,16 @@ public abstract class Task {
   public String convertToLine() {
     return "%s | %s".formatted(isDone ? "1" : "0", taskName);
   }
+
+  /**
+   * Checks if this task is scheduled for today.
+   *
+   * <p>Normal tasks always return false. Deadline tasks return true if the deadline is today. Event
+   * tasks return true if today is between the start and end dates.
+   *
+   * @return true if the task occurs today, false otherwise
+   */
+  public boolean isToday() {
+    return false;
+  }
 }

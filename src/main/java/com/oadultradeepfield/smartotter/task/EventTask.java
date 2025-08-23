@@ -1,6 +1,7 @@
 package com.oadultradeepfield.smartotter.task;
 
 import com.oadultradeepfield.smartotter.util.DateParser;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /** A {@link Task} representing an event with a start and end date. */
@@ -42,5 +43,13 @@ public class EventTask extends Task {
             super.convertToLine(),
             DateParser.formatForLine(dateFrom),
             DateParser.formatForLine(dateTo));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public boolean isToday() {
+    LocalDate now = LocalDate.now();
+    return (now.isAfter(dateFrom.toLocalDate()) || now.isEqual(dateFrom.toLocalDate()))
+        && (now.isBefore(dateTo.toLocalDate()) || now.isEqual(dateTo.toLocalDate()));
   }
 }

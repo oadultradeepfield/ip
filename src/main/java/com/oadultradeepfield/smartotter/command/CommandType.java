@@ -8,6 +8,7 @@ public enum CommandType {
   DEADLINE("deadline", AddDeadlineTaskCommand::fromInput),
   EVENT("event", AddEventTaskCommand::fromInput),
   LIST("list", ListCommand::fromInput),
+  TODAY("today", TodayCommand::fromInput),
   BYE("bye", ByeCommand::fromInput),
   MARK("mark", MarkCommand::fromInput),
   UNMARK("unmark", UnmarkCommand::fromInput),

@@ -56,8 +56,8 @@ public class TaskParser {
       }
       to = parsedTo.get();
 
-      if (parsedTo.get().isBefore(deadlineOrFrom)) {
-        throw new SmartOtterException("Start time cannot be after end time.");
+      if (parsedTo.get().isBefore(deadlineOrFrom) || parsedTo.get().isEqual(deadlineOrFrom)) {
+        throw new SmartOtterException("Start time must be before end time.");
       }
     }
 

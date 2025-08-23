@@ -1,6 +1,7 @@
 package com.oadultradeepfield.smartotter.task;
 
 import com.oadultradeepfield.smartotter.util.DateParser;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /** A {@link Task} with a deadline. */
@@ -34,5 +35,12 @@ public class DeadlineTask extends Task {
   @Override
   public String convertToLine() {
     return "D | %s | %s".formatted(super.convertToLine(), DateParser.formatForLine(deadline));
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public boolean isToday() {
+    LocalDate now = LocalDate.now();
+    return now.isEqual(deadline.toLocalDate());
   }
 }
