@@ -27,9 +27,6 @@ public class SmartOtter {
             new Thread(
                 () -> {
                   FileManager.saveTasksToFile(SmartOtterConstant.SAVE_PATH, tasks);
-                  CustomIO.printPretty(
-                      "Tasks saved to %s successfully before shutdown 🐟"
-                          .formatted(SmartOtterConstant.SAVE_PATH));
                 }));
 
     CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);

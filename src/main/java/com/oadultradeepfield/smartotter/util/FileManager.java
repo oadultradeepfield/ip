@@ -1,11 +1,14 @@
 package com.oadultradeepfield.smartotter.util;
 
+import com.oadultradeepfield.smartotter.SmartOtterConstant;
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.task.TaskParser;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +43,33 @@ public class FileManager {
   }
 
   public static void saveTasksToFile(String fileName, List<Task> tasks) {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-      for (Task task : tasks) {
-        writer.write(task.convertToLine());
-        writer.newLine(); // add new line
+    try {
+      Path path = Path.of(fileName);
+
+      // Ensure parent directory exists
+      if (path.getParent() != null && Files.notExists(path.getParent())) {
+        Files.createDirectories(path.getParent());
       }
+
+      // Open writer (auto-creates file if missing, truncates if exists)
+      try (BufferedWriter writer =
+          Files.newBufferedWriter(
+              path,
+              StandardOpenOption.CREATE,
+              StandardOpenOption.TRUNCATE_EXISTING,
+              StandardOpenOption.WRITE)) {
+        for (Task task : tasks) {
+          writer.write(task.convertToLine());
+          writer.newLine();
+        }
+        CustomIO.printPretty(
+            "Tasks saved to %s successfully before shutdown 🐟"
+                .formatted(SmartOtterConstant.SAVE_PATH));
+      }
+
     } catch (IOException e) {
       CustomIO.printPretty(
-          CustomIO.formatError("Error saving file: %s (%s)".formatted(fileName, e.getMessage())));
+          CustomIO.formatError("Error saving file: " + fileName + " (" + e.getMessage() + ")"));
     }
   }
 }
