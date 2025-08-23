@@ -1,6 +1,9 @@
 package com.oadultradeepfield.smartotter.task;
 
 import com.oadultradeepfield.smartotter.SmartOtterException;
+import com.oadultradeepfield.smartotter.util.DateParser;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /** Utility class for parsing task strings into {@link Task} objects. */
 public class TaskParser {
@@ -34,16 +37,31 @@ public class TaskParser {
     }
 
     String taskName = parts[2];
-    String deadlineOrFrom = (parts.length > 3) ? parts[3] : null;
-    String deadlineOrTo = (parts.length > 4) ? parts[4] : null;
+    LocalDateTime deadlineOrFrom = null;
+    LocalDateTime to = null;
 
-    // Skip if required fields are missing
-    if ((parts.length > 3 && deadlineOrFrom == null)
-        || (parts.length > 4 && deadlineOrTo == null)) {
-      throw new SmartOtterException("Missing deadline fields");
+    // Parse the optional dates
+    if (parts.length > 3) {
+      Optional<LocalDateTime> parsed = DateParser.parse(parts[3]);
+      if (parsed.isEmpty()) {
+        throw new SmartOtterException("Invalid deadline or start time: " + parts[3]);
+      }
+      deadlineOrFrom = parsed.get();
     }
 
-    return createTask(type, status, taskName, deadlineOrFrom, deadlineOrTo);
+    if (parts.length > 4) {
+      Optional<LocalDateTime> parsedTo = DateParser.parse(parts[4]);
+      if (parsedTo.isEmpty()) {
+        throw new SmartOtterException("Invalid end time: " + parts[4]);
+      }
+      to = parsedTo.get();
+
+      if (parsedTo.get().isBefore(deadlineOrFrom)) {
+        throw new SmartOtterException("Start time cannot be after end time.");
+      }
+    }
+
+    return createTask(type, status, taskName, deadlineOrFrom, to);
   }
 
   /**
@@ -57,7 +75,11 @@ public class TaskParser {
    * @return the created {@link Task}, or {@code null} if type is unknown
    */
   public static Task createTask(
-      String type, int status, String taskName, String deadlineOrFrom, String deadlineOrTo) {
+      String type,
+      int status,
+      String taskName,
+      LocalDateTime deadlineOrFrom,
+      LocalDateTime deadlineOrTo) {
     Task task =
         switch (type) {
           case "T" -> new ToDoTask(taskName);
