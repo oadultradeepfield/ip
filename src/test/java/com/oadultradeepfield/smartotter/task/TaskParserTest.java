@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -14,68 +15,81 @@ import com.oadultradeepfield.smartotter.SmartOtterException;
 
 class TaskParserTest {
     @Test
-    void parse_validTodoWithoutDates_returnsToDoTask() throws Exception {
-        String line = "T | 0 | Read book";
-        Optional<Task> opt = TaskParser.parse(line);
-        assertTrue(opt.isPresent());
-        Task t = opt.get();
-        assertInstanceOf(ToDoTask.class, t);
-        assertEquals("Read book", t.getTaskName());
-        assertFalse(t.isDone);
+    void createTodoTask_shouldReturnTodoTask_whenTypeIsT() {
+        Optional<Task> taskOpt = TaskParser.createTask("T", 0, "Buy milk", null, null);
+
+        assertTrue(taskOpt.isPresent());
+        Task task = taskOpt.get();
+        assertInstanceOf(ToDoTask.class, task);
+        assertEquals("Buy milk", task.getTaskName());
+        assertFalse(task.isDone);
     }
 
     @Test
-    void parse_validDeadlineWithDate_returnsDeadlineTask() throws Exception {
-        // Input format matches DateParser expectations (e.g. "d/M/yyyy HHmm")
-        String line = "D | 1 | Finish report | 2/12/2019 1800";
-        Optional<Task> opt = TaskParser.parse(line);
+    void createDeadlineTask_shouldReturnDeadlineTaskWithDeadline() {
+        LocalDateTime deadline = LocalDateTime.of(2025, 1, 1, 12, 0);
+        Optional<Task> taskOpt = TaskParser.createTask("D", 1, "Submit report", deadline, null);
 
-        assertTrue(opt.isPresent());
-        Task t = opt.get();
-        assertInstanceOf(DeadlineTask.class, t);
-        assertEquals("Finish report", t.getTaskName());
-        assertTrue(t.isDone);
+        assertTrue(taskOpt.isPresent());
+        Task task = taskOpt.get();
+        assertInstanceOf(DeadlineTask.class, task);
+        assertEquals("Submit report", task.getTaskName());
+        assertTrue(task.isDone); // because status=1
     }
 
     @Test
-    void parse_validEventWithDates_returnsEventTask() throws Exception {
-        String line = "E | 0 | Team meeting | 2/12/2019 0900 | 2/12/2019 1700";
-        Optional<Task> opt = TaskParser.parse(line);
+    void createEventTask_shouldReturnEventTaskWithTimes() {
+        LocalDateTime start = LocalDateTime.of(2025, 1, 1, 9, 0);
+        LocalDateTime end = LocalDateTime.of(2025, 1, 1, 10, 0);
 
-        assertTrue(opt.isPresent());
-        Task t = opt.get();
-        assertInstanceOf(EventTask.class, t);
-        assertEquals("Team meeting", t.getTaskName());
-        assertFalse(t.isDone);
+        Optional<Task> taskOpt = TaskParser.createTask("E", 0, "Meeting", start, end);
+
+        assertTrue(taskOpt.isPresent());
+        Task task = taskOpt.get();
+        assertInstanceOf(EventTask.class, task);
+        assertEquals("Meeting", task.getTaskName());
+        assertFalse(task.isDone);
     }
 
     @Test
-    void parse_invalidParts_throwsException() {
-        assertThrows(SmartOtterException.class,
-                () -> TaskParser.parse("OnlyTwoParts | 0"));
+    void createTask_shouldReturnEmptyOptional_whenTypeIsUnknown() {
+        Optional<Task> taskOpt = TaskParser.createTask("X", 0, "Unknown", null, null);
+        assertTrue(taskOpt.isEmpty());
     }
 
     @Test
-    void parse_invalidStatusNumber_throwsException() {
-        assertThrows(SmartOtterException.class,
-                () -> TaskParser.parse("T | notNumber | Name"));
+    void parse_shouldThrowException_whenEndTimeBeforeStartTime() {
+        String line = "E | 0 | Meeting | 1/1/2025 1000 | 1/1/2025 0900";
+
+        SmartOtterException exception = assertThrows(SmartOtterException.class, () -> TaskParser.parse(line));
+
+        assertEquals("😵‍💫 Oops! - Start time must be before end time.", exception.getMessage());
     }
 
     @Test
-    void parse_invalidStatusValue_throwsException() {
-        assertThrows(SmartOtterException.class,
-                () -> TaskParser.parse("T | 2 | Name"));
+    void parse_shouldThrowException_whenStatusIsInvalid() {
+        String line = "T | 5 | Buy milk";
+
+        SmartOtterException exception = assertThrows(SmartOtterException.class, () -> TaskParser.parse(line));
+
+        assertEquals("😵‍💫 Oops! - Invalid status value", exception.getMessage());
     }
 
     @Test
-    void parse_invalidDateFormat_throwsException() {
-        assertThrows(SmartOtterException.class,
-                () -> TaskParser.parse("D | 0 | Name | bad-date"));
+    void parse_shouldThrowException_whenDateIsInvalid() {
+        String line = "D | 0 | Submit report | invalid-date";
+
+        SmartOtterException exception = assertThrows(SmartOtterException.class, () -> TaskParser.parse(line));
+
+        assertTrue(exception.getMessage().startsWith("😵‍💫 Oops! - Invalid deadline or start time"));
     }
 
     @Test
-    void parse_eventEndBeforeStart_throwsException() {
-        assertThrows(SmartOtterException.class,
-                () -> TaskParser.parse("E | 0 | Name | 2/12/2019 1800 | 2/12/2019 1200"));
+    void parse_shouldThrowException_whenNotEnoughParts() {
+        String line = "T | 0";
+
+        SmartOtterException exception = assertThrows(SmartOtterException.class, () -> TaskParser.parse(line));
+
+        assertEquals("😵‍💫 Oops! - Not enough parts", exception.getMessage());
     }
 }
