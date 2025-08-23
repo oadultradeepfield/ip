@@ -5,43 +5,48 @@ import com.oadultradeepfield.smartotter.command.CommandContext;
 import com.oadultradeepfield.smartotter.command.CommandParser;
 import com.oadultradeepfield.smartotter.command.Executable;
 import com.oadultradeepfield.smartotter.task.Task;
-import com.oadultradeepfield.smartotter.util.CustomIO;
 import com.oadultradeepfield.smartotter.util.FileManager;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /** Main class for the SmartOtter interactive console application. */
 public class SmartOtter {
-  private static final List<Task> tasks =
-      FileManager.readTasksFromFile(SmartOtterConstant.SAVE_PATH);
-  private static final CommandParser parser = new CommandParser();
-  private static final CommandContext context = new CommandContext(tasks);
-  private static final Scanner scanner = new Scanner(System.in);
+  private final SmartOtterUI ui;
+  private final FileManager fileManager;
+  private final CommandParser parser;
+  private final CommandContext context;
+
+  public SmartOtter(String filePath) {
+    this.ui = new SmartOtterUI();
+    this.fileManager = new FileManager(filePath);
+    this.parser = new CommandParser();
+
+    // Load tasks using FileManager
+    List<Task> tasks = this.fileManager.readTasksFromFile();
+    context = new CommandContext(tasks);
+
+    // Add shutdown hook to save tasks
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> this.fileManager.saveTasksToFile(tasks)));
+  }
 
   /** Entry point. Runs interactive loop until user exits. */
   public static void main(String[] args) {
-    // Add shutdown hook to save tasks no matter what
-    Runtime.getRuntime()
-        .addShutdownHook(
-            new Thread(() -> FileManager.saveTasksToFile(SmartOtterConstant.SAVE_PATH, tasks)));
+    new SmartOtter(SmartOtterConstant.SAVE_PATH).run();
+  }
 
-    CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);
+  public void run() {
+    ui.showGreeting();
 
-    String input;
     while (true) {
       try {
-        input = CustomIO.sanitizeInput(scanner.nextLine());
+        String input = ui.readCommand();
         Executable executable = parser.parse(input);
         executable.execute(context);
 
         if (executable instanceof ByeCommand) {
           break;
         }
-      } catch (SmartOtterException e) {
-        CustomIO.printPretty(e.getMessage());
-      } catch (NoSuchElementException | IllegalStateException | IllegalArgumentException e) {
-        CustomIO.printPretty(CustomIO.formatError(e.getMessage()));
+      } catch (Exception e) {
+        ui.showError(e.getMessage());
       }
     }
   }
