@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /** Utility class for reading and writing {@link Task} objects from and to files. */
 public class FileManager {
@@ -33,9 +34,11 @@ public class FileManager {
       String line;
       while ((line = reader.readLine()) != null) {
         try {
-          Task task = TaskParser.parse(line);
-          tasks.add(task);
-          success++;
+          Optional<Task> task = TaskParser.parse(line);
+          if (task.isPresent()) {
+            tasks.add(task.get());
+            success++;
+          }
         } catch (SmartOtterException e) {
           failed++;
         }
@@ -77,8 +80,7 @@ public class FileManager {
           writer.newLine();
         }
         CustomIO.printPretty(
-            "Tasks saved to %s successfully before shutdown 🐟"
-                .formatted(SmartOtterConstant.SAVE_PATH));
+            "Tasks saved to %s successfully 🐟".formatted(SmartOtterConstant.SAVE_PATH));
       }
 
     } catch (IOException e) {

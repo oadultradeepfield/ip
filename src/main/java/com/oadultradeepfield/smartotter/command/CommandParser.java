@@ -1,6 +1,7 @@
 package com.oadultradeepfield.smartotter.command;
 
 import com.oadultradeepfield.smartotter.SmartOtterException;
+import java.util.Set;
 
 /** Parses user input into corresponding {@link Executable} instances. */
 public class CommandParser {
@@ -18,23 +19,27 @@ public class CommandParser {
 
     CommandType type = CommandType.fromKeyword(commandWord);
 
-    // Special case: treat "list something" or "bye someone" as AddTodoCommand
-    if ((commandWord.equals("list") || commandWord.equals("bye")) && parts.length > 1) {
-      return new AddTodoCommand(input);
+    if (type == null) {
+      throw new SmartOtterException(
+          "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
+              .formatted(commandWord));
     }
 
-    if (type != null) {
-      if (commandWord.equals("bye") || commandWord.equals("list")) {
-        return type.create("");
-      }
+    // Commands that do not take arguments
+    Set<String> noArgCommands = Set.of("bye", "list", "today");
+    if (noArgCommands.contains(commandWord)) {
       if (parts.length > 1) {
-        return type.create(parts[1]);
+        throw new SmartOtterException(
+            "Command '%s' does not take any arguments".formatted(commandWord));
       }
+      return type.create("");
+    }
+
+    // Commands that require arguments
+    if (parts.length < 2) {
       throw new SmartOtterException("Command '%s' requires one argument".formatted(commandWord));
     }
 
-    throw new SmartOtterException(
-        "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
-            .formatted(commandWord));
+    return type.create(parts[1]);
   }
 }
