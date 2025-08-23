@@ -8,18 +8,17 @@ import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 
 /**
- * A command that lists all current tasks with their status.
+ * A command that finds tasks containing a given keyword (case-insensitive).
  */
-public class ListCommand implements Executable {
+public record FindCommand(String keyword) implements Executable {
     /**
-     * Creates a {@code ListCommand} from user input. This command ignores any provided input.
+     * Creates a {@code FindCommand} from user input.
      *
-     * @param input unused input string
-     * @return a new {@code ListCommand} instance
+     * @param input the search keyword
+     * @return a new {@code FindCommand} instance
      */
-    @SuppressWarnings("unused")
     public static Executable fromInput(String input) {
-        return new ListCommand();
+        return new FindCommand(input.trim());
     }
 
     /**
@@ -27,13 +26,15 @@ public class ListCommand implements Executable {
      */
     @Override
     public void execute(CommandContext context) {
-        List<Task> tasks = context.tasks();
-
+        List<Task> tasks = context.findTasks(keyword);
         String result =
                 IntStream.range(0, tasks.size())
                         .mapToObj(i -> (i + 1) + ". " + tasks.get(i))
                         .collect(Collectors.joining("\n"));
+
         CustomIO.printPretty(
-                result.isEmpty() ? "Congratulations! You don't have any tasks at the moment." : result);
+                result.isEmpty()
+                        ? "Hmm... I couldn't find any task containing \"%s\".".formatted(keyword)
+                        : "Here are the matching tasks I found:\n" + result);
     }
 }
