@@ -1,30 +1,35 @@
 package com.oadultradeepfield.smartotter.command;
 
-import com.oadultradeepfield.smartotter.util.CustomIO;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/** A command that lists all current tasks with their status. */
-public class ListCommand implements Executable {
-  /**
-   * Creates a {@code ListCommand} from user input. This command ignores any provided input.
-   *
-   * @param input unused input string
-   * @return a new {@code ListCommand} instance
-   */
-  @SuppressWarnings("unused")
-  public static Executable fromInput(String input) {
-    return new ListCommand();
-  }
+import com.oadultradeepfield.smartotter.util.CustomIO;
 
-  /** {@inheritDoc} */
-  @Override
-  public void execute(CommandContext context) {
-    String result =
-        IntStream.range(0, context.taskCount())
-            .mapToObj(i -> (i + 1) + ". " + context.getTask(i).toString())
-            .collect(Collectors.joining("\n"));
-    CustomIO.printPretty(
-        result.isEmpty() ? "Congratulations! You don't have any tasks at the moment." : result);
-  }
+/**
+ * A command that lists all current tasks with their status.
+ */
+public class ListCommand implements Executable {
+    /**
+     * Creates a {@code ListCommand} from user input. This command ignores any provided input.
+     *
+     * @param input unused input string
+     * @return a new {@code ListCommand} instance
+     */
+    @SuppressWarnings("unused")
+    public static Executable fromInput(String input) {
+        return new ListCommand();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(CommandContext context) {
+        String result =
+                IntStream.range(0, context.taskCount())
+                        .mapToObj(i -> (i + 1) + ". " + context.getTask(i).toString())
+                        .collect(Collectors.joining("\n"));
+        CustomIO.printPretty(
+                result.isEmpty() ? "Congratulations! You don't have any tasks at the moment." : result);
+    }
 }
