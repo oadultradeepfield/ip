@@ -26,4 +26,10 @@ public class DeadlineTask extends Task {
   public String toString() {
     return "%s (by: %s)".formatted(super.toString(), deadline);
   }
+
+  /** {@inheritDoc} */
+  @Override
+  public String convertToLine() {
+    return "D | %s | %s".formatted(super.convertToLine(), deadline);
+  }
 }

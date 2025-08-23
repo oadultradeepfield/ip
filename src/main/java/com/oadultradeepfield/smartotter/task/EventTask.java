@@ -29,4 +29,10 @@ public class EventTask extends Task {
   public String toString() {
     return "%s (from: %s, to: %s)".formatted(super.toString(), dateFrom, dateTo);
   }
+
+  /** {@inheritDoc} */
+  @Override
+  public String convertToLine() {
+    return "E | %s | %s | %s".formatted(super.convertToLine(), dateFrom, dateTo);
+  }
 }
