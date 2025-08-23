@@ -26,6 +26,24 @@ public class EventTask extends Task {
     }
 
     /**
+     * Returns the start date of the event.
+     *
+     * @return the start date as a {@link LocalDateTime}
+     */
+    public LocalDateTime getDateFrom() {
+        return dateFrom;
+    }
+
+    /**
+     * Returns the end date of the event.
+     *
+     * @return the end date as a {@link LocalDateTime}
+     */
+    public LocalDateTime getDateTo() {
+        return dateTo;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

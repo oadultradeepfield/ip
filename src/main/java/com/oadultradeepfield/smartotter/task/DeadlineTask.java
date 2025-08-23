@@ -47,6 +47,15 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Returns the deadline of the task.
+     *
+     * @return the deadline as a {@link LocalDateTime}
+     */
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
