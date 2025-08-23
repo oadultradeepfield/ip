@@ -37,6 +37,10 @@ public class EventTask extends Task {
   /** {@inheritDoc} */
   @Override
   public String convertToLine() {
-    return "E | %s | %s | %s".formatted(super.convertToLine(), dateFrom, dateTo);
+    return "E | %s | %s | %s"
+        .formatted(
+            super.convertToLine(),
+            DateParser.formatForLine(dateFrom),
+            DateParser.formatForLine(dateTo));
   }
 }

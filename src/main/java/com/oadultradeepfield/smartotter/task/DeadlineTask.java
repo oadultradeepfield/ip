@@ -33,6 +33,6 @@ public class DeadlineTask extends Task {
   /** {@inheritDoc} */
   @Override
   public String convertToLine() {
-    return "D | %s | %s".formatted(super.convertToLine(), deadline);
+    return "D | %s | %s".formatted(super.convertToLine(), DateParser.formatForLine(deadline));
   }
 }
