@@ -12,7 +12,14 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Utility class for reading and writing {@link Task} objects from and to files. */
 public class FileManager {
+  /**
+   * Reads tasks from a given file. Lines that cannot be parsed are skipped.
+   *
+   * @param fileName the file path to read tasks from
+   * @return a list of successfully parsed tasks, or an empty list if the file does not exist
+   */
   public static List<Task> readTasksFromFile(String fileName) {
     List<Task> tasks = new ArrayList<>();
     int success = 0, failed = 0;
@@ -42,6 +49,13 @@ public class FileManager {
     return tasks;
   }
 
+  /**
+   * Saves a list of tasks to the specified file. Creates parent directories if necessary. Existing
+   * content will be overwritten.
+   *
+   * @param fileName the file path to save tasks into
+   * @param tasks the list of tasks to save
+   */
   public static void saveTasksToFile(String fileName, List<Task> tasks) {
     try {
       Path path = Path.of(fileName);

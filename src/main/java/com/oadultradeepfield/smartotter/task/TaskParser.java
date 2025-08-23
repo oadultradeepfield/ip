@@ -2,7 +2,17 @@ package com.oadultradeepfield.smartotter.task;
 
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
+/** Utility class for parsing task strings into {@link Task} objects. */
 public class TaskParser {
+  /**
+   * Parses a line of text into a {@link Task}.
+   *
+   * <p>Expected format: {@code type | status | name | [deadline/from] | [to]}.
+   *
+   * @param line the line to parse
+   * @return the parsed {@link Task}
+   * @throws SmartOtterException if the line is invalid or cannot be parsed
+   */
   public static Task parse(String line) throws SmartOtterException {
     // Split by " | "
     String[] parts = line.split("\\s*\\|\\s*");
@@ -36,6 +46,16 @@ public class TaskParser {
     return createTask(type, status, taskName, deadlineOrFrom, deadlineOrTo);
   }
 
+  /**
+   * Creates a {@link Task} object based on type and properties.
+   *
+   * @param type the task type ("T" = ToDo, "D" = Deadline, "E" = Event)
+   * @param status 0 if not done, 1 if done
+   * @param taskName the task description
+   * @param deadlineOrFrom the deadline (for Deadline) or start time (for Event)
+   * @param deadlineOrTo the end time (for Event), may be {@code null}
+   * @return the created {@link Task}, or {@code null} if type is unknown
+   */
   public static Task createTask(
       String type, int status, String taskName, String deadlineOrFrom, String deadlineOrTo) {
     Task task =

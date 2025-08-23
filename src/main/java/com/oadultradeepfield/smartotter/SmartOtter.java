@@ -24,10 +24,7 @@ public class SmartOtter {
     // Add shutdown hook to save tasks no matter what
     Runtime.getRuntime()
         .addShutdownHook(
-            new Thread(
-                () -> {
-                  FileManager.saveTasksToFile(SmartOtterConstant.SAVE_PATH, tasks);
-                }));
+            new Thread(() -> FileManager.saveTasksToFile(SmartOtterConstant.SAVE_PATH, tasks)));
 
     CustomIO.printPretty(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE);
 
