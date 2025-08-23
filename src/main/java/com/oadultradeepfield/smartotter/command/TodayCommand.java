@@ -23,11 +23,7 @@ public class TodayCommand implements Executable {
   /** {@inheritDoc} */
   @Override
   public void execute(CommandContext context) {
-    List<Task> tasks =
-        context.tasks().stream()
-            .filter(Task::isToday) // filter tasks for today
-            .toList();
-
+    List<Task> tasks = context.listToday();
     String result =
         IntStream.range(0, tasks.size())
             .mapToObj(i -> (i + 1) + ". " + tasks.get(i))

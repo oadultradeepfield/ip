@@ -3,7 +3,7 @@ package com.oadultradeepfield.smartotter.command;
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
-import java.util.List;
+import java.util.Optional;
 
 /** Deletes the specified task from the list. */
 public record DeleteCommand(int taskNumber) implements Executable {
@@ -33,17 +33,19 @@ public record DeleteCommand(int taskNumber) implements Executable {
   /** {@inheritDoc} */
   @Override
   public void execute(CommandContext context) {
-    List<Task> tasks = context.tasks();
-    if (taskNumber >= 1 && taskNumber <= tasks.size()) {
-      Task task = tasks.get(taskNumber - 1);
-      tasks.remove(task);
+    // Convert 1-based to 0-based index and use getTask()
+    Optional<Task> taskToDelete = context.getTask(taskNumber - 1);
+
+    if (taskToDelete.isPresent()) {
+      Task task = taskToDelete.get();
+      context.tasks().remove(task);
 
       String message =
           """
-                        Got it! I have deleted the task:
-                            %s
-                        Now you have %d tasks left."""
-              .formatted(task, context.tasks().size());
+                                  Got it! I have deleted the task:
+                                      %s
+                                  Now you have %d tasks left."""
+              .formatted(task, context.taskCount()); // Use taskCount() method
       CustomIO.printPretty(message);
     } else {
       CustomIO.printPretty(

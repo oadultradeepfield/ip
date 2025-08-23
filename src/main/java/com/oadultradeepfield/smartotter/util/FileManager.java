@@ -1,6 +1,5 @@
 package com.oadultradeepfield.smartotter.util;
 
-import com.oadultradeepfield.smartotter.SmartOtterConstant;
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.task.TaskParser;
@@ -15,13 +14,23 @@ import java.util.Optional;
 
 /** Utility class for reading and writing {@link Task} objects from and to files. */
 public class FileManager {
+  private final String fileName;
+
   /**
-   * Reads tasks from a given file. Lines that cannot be parsed are skipped.
+   * Creates a new FileManager instance for the specified file.
    *
-   * @param fileName the file path to read tasks from
+   * @param fileName the file path to manage tasks for
+   */
+  public FileManager(String fileName) {
+    this.fileName = fileName;
+  }
+
+  /**
+   * Reads tasks from the managed file. Lines that cannot be parsed are skipped.
+   *
    * @return a list of successfully parsed tasks, or an empty list if the file does not exist
    */
-  public static List<Task> readTasksFromFile(String fileName) {
+  public List<Task> readTasksFromFile() {
     List<Task> tasks = new ArrayList<>();
     int success = 0, failed = 0;
 
@@ -53,13 +62,12 @@ public class FileManager {
   }
 
   /**
-   * Saves a list of tasks to the specified file. Creates parent directories if necessary. Existing
+   * Saves a list of tasks to the managed file. Creates parent directories if necessary. Existing
    * content will be overwritten.
    *
-   * @param fileName the file path to save tasks into
    * @param tasks the list of tasks to save
    */
-  public static void saveTasksToFile(String fileName, List<Task> tasks) {
+  public void saveTasksToFile(List<Task> tasks) {
     try {
       Path path = Path.of(fileName);
 
@@ -79,8 +87,7 @@ public class FileManager {
           writer.write(task.convertToLine());
           writer.newLine();
         }
-        CustomIO.printPretty(
-            "Tasks saved to %s successfully 🐟".formatted(SmartOtterConstant.SAVE_PATH));
+        CustomIO.printPretty("Tasks saved to %s successfully 🐟".formatted(fileName));
       }
 
     } catch (IOException e) {
