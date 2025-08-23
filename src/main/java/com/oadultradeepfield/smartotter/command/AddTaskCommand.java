@@ -19,7 +19,7 @@ public abstract class AddTaskCommand implements Executable {
   /** {@inheritDoc} */
   @Override
   public void execute(CommandContext context) {
-    context.tasks().add(task);
+    context.addTask(task);
     String message =
         """
                 Got it! I have added the task:

@@ -4,9 +4,7 @@ import com.oadultradeepfield.smartotter.command.ByeCommand;
 import com.oadultradeepfield.smartotter.command.CommandContext;
 import com.oadultradeepfield.smartotter.command.CommandParser;
 import com.oadultradeepfield.smartotter.command.Executable;
-import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.FileManager;
-import java.util.List;
 
 /** Main class for the SmartOtter interactive console application. */
 public class SmartOtter {
@@ -19,13 +17,11 @@ public class SmartOtter {
     this.ui = new SmartOtterUI();
     this.fileManager = new FileManager(filePath);
     this.parser = new CommandParser();
-
-    // Load tasks using FileManager
-    List<Task> tasks = this.fileManager.readTasksFromFile();
-    context = new CommandContext(tasks);
+    this.context = new CommandContext(this.fileManager.readTasksFromFile());
 
     // Add shutdown hook to save tasks
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> this.fileManager.saveTasksToFile(tasks)));
+    Runtime.getRuntime()
+        .addShutdownHook(new Thread(() -> this.fileManager.saveTasksToFile(context.tasks())));
   }
 
   /** Entry point. Runs interactive loop until user exits. */

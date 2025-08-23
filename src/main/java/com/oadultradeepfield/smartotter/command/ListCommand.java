@@ -1,8 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
-import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,10 +20,9 @@ public class ListCommand implements Executable {
   /** {@inheritDoc} */
   @Override
   public void execute(CommandContext context) {
-    List<Task> tasks = context.tasks();
     String result =
-        IntStream.range(0, tasks.size())
-            .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
+        IntStream.range(0, context.taskCount())
+            .mapToObj(i -> (i + 1) + ". " + context.getTask(i).toString())
             .collect(Collectors.joining("\n"));
     CustomIO.printPretty(
         result.isEmpty() ? "Congratulations! You don't have any tasks at the moment." : result);

@@ -3,7 +3,7 @@ package com.oadultradeepfield.smartotter.command;
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
-import java.util.List;
+import java.util.Optional;
 
 /** Marks a specified task as done. */
 public record MarkCommand(int taskNumber) implements Executable {
@@ -33,9 +33,11 @@ public record MarkCommand(int taskNumber) implements Executable {
   /** {@inheritDoc} */
   @Override
   public void execute(CommandContext context) {
-    List<Task> tasks = context.tasks();
-    if (taskNumber >= 1 && taskNumber <= tasks.size()) {
-      Task task = tasks.get(taskNumber - 1);
+    // Convert 1-based to 0-based index and use getTask()
+    Optional<Task> taskToMark = context.getTask(taskNumber - 1);
+
+    if (taskToMark.isPresent()) {
+      Task task = taskToMark.get();
       task.setDone(true);
       CustomIO.printPretty("Great work! I have marked the task as done!\n%s".formatted(task));
     } else {
