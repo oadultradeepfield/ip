@@ -17,6 +17,9 @@ public final class SmartOtterConstant {
   /** Message displayed when user exits the application */
   public static final String FAREWELL_MESSAGE = "Bye. Hope to eat more fish soon!";
 
+  /** Path for saving the list of tasks as a text file */
+  public static final String SAVE_PATH = "./data/smart_otter.txt";
+
   // Prevents instantiation
   private SmartOtterConstant() {}
 }
