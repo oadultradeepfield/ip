@@ -58,4 +58,17 @@ public record CommandContext(List<Task> tasks) {
     public List<Task> listToday() {
         return tasks.stream().filter(Task::isToday).toList();
     }
+
+    /**
+     * Returns a list of tasks containing the given keyword (case-insensitive).
+     *
+     * @param keyword the search keyword
+     * @return a filtered list of tasks containing the keyword
+     */
+    public List<Task> findTasks(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
+        return tasks.stream()
+                .filter(task -> task.toString().toLowerCase().contains(lowerKeyword))
+                .toList();
+    }
 }

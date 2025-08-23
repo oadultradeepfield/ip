@@ -51,7 +51,7 @@ public record DeleteCommand(int taskNumber) implements Executable {
                             Got it! I have deleted the task:
                                 %s
                             Now you have %d tasks left."""
-                            .formatted(task, context.taskCount()); // Use taskCount() method
+                            .formatted(task, context.taskCount());
             CustomIO.printPretty(message);
         } else {
             CustomIO.printPretty(

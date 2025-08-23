@@ -1,14 +1,13 @@
 package com.oadultradeepfield.smartotter.command;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
-import com.oadultradeepfield.smartotter.util.CustomIO;
+import com.oadultradeepfield.smartotter.task.Task;
 
 /**
  * A command that lists all current tasks with their status.
  */
-public class ListCommand implements Executable {
+public class ListCommand extends AbstractListCommand {
     /**
      * Creates a {@code ListCommand} from user input. This command ignores any provided input.
      *
@@ -24,12 +23,15 @@ public class ListCommand implements Executable {
      * {@inheritDoc}
      */
     @Override
-    public void execute(CommandContext context) {
-        String result =
-                IntStream.range(0, context.taskCount())
-                        .mapToObj(i -> (i + 1) + ". " + context.getTask(i).toString())
-                        .collect(Collectors.joining("\n"));
-        CustomIO.printPretty(
-                result.isEmpty() ? "Congratulations! You don't have any tasks at the moment." : result);
+    protected List<Task> getTasks(CommandContext context) {
+        return context.tasks();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String emptyMessage() {
+        return "Congratulations! You don't have any tasks at the moment.";
     }
 }

@@ -45,6 +45,8 @@ public class SmartOtter {
                 if (executable instanceof ByeCommand) {
                     break;
                 }
+            } catch (SmartOtterException e) {
+                ui.showMessage(e.getMessage());
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             }
