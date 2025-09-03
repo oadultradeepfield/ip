@@ -25,11 +25,11 @@ public abstract class AddTaskCommand implements Executable {
     public void execute(CommandContext context) {
         context.addTask(task);
         String message =
-                """
-                        Got it! I have added the task:
-                            %s
-                        Now you have %d tasks. It could be tough, but good luck!"""
-                        .formatted(task, context.tasks().size());
+            """
+                Got it! I have added the task:
+                    %s
+                Now you have %d tasks. It could be tough, but good luck!"""
+                .formatted(task, context.tasks().size());
 
         CustomIO.printPretty(message);
     }

@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
@@ -47,15 +46,15 @@ public record DeleteCommand(int taskNumber) implements Executable {
             context.tasks().remove(task);
 
             String message =
-                    """
-                            Got it! I have deleted the task:
-                                %s
-                            Now you have %d tasks left."""
-                            .formatted(task, context.taskCount());
+                """
+                    Got it! I have deleted the task:
+                        %s
+                    Now you have %d tasks left."""
+                    .formatted(task, context.taskCount());
             CustomIO.printPretty(message);
         } else {
             CustomIO.printPretty(
-                    CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
+                CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
         }
     }
 }

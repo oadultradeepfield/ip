@@ -2,7 +2,6 @@ package com.oadultradeepfield.smartotter.command;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.task.Task;
 
 /**
@@ -68,7 +67,7 @@ public record CommandContext(List<Task> tasks) {
     public List<Task> findTasks(String keyword) {
         String lowerKeyword = keyword.toLowerCase();
         return tasks.stream()
-                .filter(task -> task.toString().toLowerCase().contains(lowerKeyword))
-                .toList();
+            .filter(task -> task.toString().toLowerCase().contains(lowerKeyword))
+            .toList();
     }
 }

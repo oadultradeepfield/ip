@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Arrays;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
 public enum CommandType {
@@ -26,9 +25,9 @@ public enum CommandType {
 
     public static CommandType fromKeyword(String keyword) {
         return Arrays.stream(values())
-                .filter(cmd -> cmd.keyword.equalsIgnoreCase(keyword))
-                .findFirst()
-                .orElse(null);
+            .filter(cmd -> cmd.keyword.equalsIgnoreCase(keyword))
+            .findFirst()
+            .orElse(null);
     }
 
     public Executable create(String input) throws SmartOtterException {

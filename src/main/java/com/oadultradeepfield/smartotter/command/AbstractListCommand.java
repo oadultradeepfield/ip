@@ -3,7 +3,6 @@ package com.oadultradeepfield.smartotter.command;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
 
@@ -40,9 +39,9 @@ public abstract class AbstractListCommand implements Executable {
         List<Task> tasks = getTasks(context);
 
         String result =
-                IntStream.range(0, tasks.size())
-                        .mapToObj(i -> (i + 1) + ". " + tasks.get(i))
-                        .collect(Collectors.joining("\n"));
+            IntStream.range(0, tasks.size())
+                .mapToObj(i -> (i + 1) + ". " + tasks.get(i))
+                .collect(Collectors.joining("\n"));
 
         if (tasks.isEmpty()) {
             CustomIO.printPretty(emptyMessage());

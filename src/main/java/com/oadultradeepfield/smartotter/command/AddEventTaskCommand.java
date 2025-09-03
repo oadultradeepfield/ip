@@ -2,7 +2,6 @@ package com.oadultradeepfield.smartotter.command;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.EventTask;
 import com.oadultradeepfield.smartotter.util.DateParser;
@@ -35,14 +34,14 @@ public final class AddEventTaskCommand extends AddTaskCommand {
         String[] fromSplit = input.split("/from", 2);
         if (fromSplit.length < 2) {
             throw new SmartOtterException(
-                    "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
+                "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
         }
         String taskName = fromSplit[0].trim();
 
         String[] toSplit = fromSplit[1].split("/to", 2);
         if (toSplit.length < 2) {
             throw new SmartOtterException(
-                    "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
+                "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
         }
         String from = toSplit[0].trim();
         String to = toSplit[1].trim();

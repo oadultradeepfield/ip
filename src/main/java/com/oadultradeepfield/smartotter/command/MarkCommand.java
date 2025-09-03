@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
@@ -48,7 +47,7 @@ public record MarkCommand(int taskNumber) implements Executable {
             CustomIO.printPretty("Great work! I have marked the task as done!\n%s".formatted(task));
         } else {
             CustomIO.printPretty(
-                    CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
+                CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
         }
     }
 }
