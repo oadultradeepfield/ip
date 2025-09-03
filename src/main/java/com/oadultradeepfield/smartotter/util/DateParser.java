@@ -11,12 +11,12 @@ import java.util.Optional;
  */
 public class DateParser {
     private static final DateTimeFormatter INPUT_WIH_TIME =
-            DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
+        DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
     private static final DateTimeFormatter INPUT_DATE_ONLY = DateTimeFormatter.ofPattern("M/d/yyyy");
     private static final DateTimeFormatter OUTPUT_WITH_TIME =
-            DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm");
+        DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm");
     private static final DateTimeFormatter OUTPUT_DATE_ONLY =
-            DateTimeFormatter.ofPattern("MMM d, yyyy");
+        DateTimeFormatter.ofPattern("MMM d, yyyy");
 
     /**
      * Parses a date string into a {@link LocalDateTime}.

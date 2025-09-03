@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.List;
-
 import com.oadultradeepfield.smartotter.task.Task;
 
 /**

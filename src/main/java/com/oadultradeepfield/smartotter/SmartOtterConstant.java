@@ -6,17 +6,17 @@ package com.oadultradeepfield.smartotter;
 public final class SmartOtterConstant {
     public static final String APP_NAME = "SmartOtter 🦦📚";
     public static final String HORIZONTAL_BAR =
-            "____________________________________________________________";
+        "____________________________________________________________";
 
     /**
      * Welcome message displayed when the application starts
      */
     public static final String GREETING_MESSAGE_TEMPLATE =
-            """
-                    Hello! I'm %s
-                    I can help you with anything,
-                    as long as you give me fish 😋"""
-                    .formatted(APP_NAME);
+        """
+            Hello! I'm %s
+            I can help you with anything,
+            as long as you give me fish 😋"""
+            .formatted(APP_NAME);
 
     /**
      * Message displayed when user exits the application

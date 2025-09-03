@@ -1,7 +1,6 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Set;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
 /**
@@ -24,8 +23,8 @@ public class CommandParser {
 
         if (type == null) {
             throw new SmartOtterException(
-                    "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
-                            .formatted(commandWord));
+                "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
+                    .formatted(commandWord));
         }
 
         // Commands that do not take arguments
@@ -33,7 +32,7 @@ public class CommandParser {
         if (noArgCommands.contains(commandWord)) {
             if (parts.length > 1) {
                 throw new SmartOtterException(
-                        "Command '%s' does not take any arguments".formatted(commandWord));
+                    "Command '%s' does not take any arguments".formatted(commandWord));
             }
             return type.create("");
         }

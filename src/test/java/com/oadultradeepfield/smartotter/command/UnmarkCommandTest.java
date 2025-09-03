@@ -3,9 +3,7 @@ package com.oadultradeepfield.smartotter.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
 class UnmarkCommandTest {
@@ -34,7 +32,7 @@ class UnmarkCommandTest {
         String input = "abc";
 
         SmartOtterException exception = assertThrows(SmartOtterException.class,
-                () -> UnmarkCommand.fromInput(input));
+            () -> UnmarkCommand.fromInput(input));
 
         assertEquals("😵‍💫 Oops! - Invalid task number: abc", exception.getMessage());
     }
@@ -44,7 +42,7 @@ class UnmarkCommandTest {
         String input = "1.5";
 
         SmartOtterException exception = assertThrows(SmartOtterException.class,
-                () -> UnmarkCommand.fromInput(input));
+            () -> UnmarkCommand.fromInput(input));
 
         assertEquals("😵‍💫 Oops! - Invalid task number: 1.5", exception.getMessage());
     }
@@ -54,7 +52,7 @@ class UnmarkCommandTest {
         String input = "";
 
         SmartOtterException exception = assertThrows(SmartOtterException.class,
-                () -> UnmarkCommand.fromInput(input));
+            () -> UnmarkCommand.fromInput(input));
 
         assertEquals("😵‍💫 Oops! - Invalid task number: ", exception.getMessage());
     }

@@ -27,8 +27,8 @@ public class CustomIO {
      */
     public static void printPretty(String input) {
         String formattedInput =
-                "%s\n%s\n%s"
-                        .formatted(SmartOtterConstant.HORIZONTAL_BAR, input, SmartOtterConstant.HORIZONTAL_BAR);
+            "%s\n%s\n%s"
+                .formatted(SmartOtterConstant.HORIZONTAL_BAR, input, SmartOtterConstant.HORIZONTAL_BAR);
         System.out.println(formattedInput.indent(4));
     }
 

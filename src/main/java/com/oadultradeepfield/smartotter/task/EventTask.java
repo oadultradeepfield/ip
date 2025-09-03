@@ -2,7 +2,6 @@ package com.oadultradeepfield.smartotter.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import com.oadultradeepfield.smartotter.util.DateParser;
 
 /**
@@ -39,7 +38,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return "%s (from: %s, to: %s)"
-                .formatted(super.toString(), DateParser.format(dateFrom), DateParser.format(dateTo));
+            .formatted(super.toString(), DateParser.format(dateFrom), DateParser.format(dateTo));
     }
 
     /**
@@ -48,10 +47,10 @@ public class EventTask extends Task {
     @Override
     public String convertToLine() {
         return "E | %s | %s | %s"
-                .formatted(
-                        super.convertToLine(),
-                        DateParser.formatForLine(dateFrom),
-                        DateParser.formatForLine(dateTo));
+            .formatted(
+                super.convertToLine(),
+                DateParser.formatForLine(dateFrom),
+                DateParser.formatForLine(dateTo));
     }
 
     /**
@@ -61,6 +60,6 @@ public class EventTask extends Task {
     public boolean isToday() {
         LocalDate now = LocalDate.now();
         return (now.isAfter(dateFrom.toLocalDate()) || now.isEqual(dateFrom.toLocalDate()))
-                && (now.isBefore(dateTo.toLocalDate()) || now.isEqual(dateTo.toLocalDate()));
+            && (now.isBefore(dateTo.toLocalDate()) || now.isEqual(dateTo.toLocalDate()));
     }
 }

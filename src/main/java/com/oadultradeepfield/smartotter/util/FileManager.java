@@ -11,7 +11,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.task.TaskParser;
@@ -38,7 +37,8 @@ public class FileManager {
      */
     public List<Task> readTasksFromFile() {
         List<Task> tasks = new ArrayList<>();
-        int success = 0, failed = 0;
+        int success = 0;
+        int failed = 0;
 
         // If file doesn't exist, return empty list without error
         if (!Files.exists(Paths.get(fileName))) {
@@ -60,7 +60,7 @@ public class FileManager {
             }
         } catch (IOException e) {
             CustomIO.printPretty(
-                    CustomIO.formatError("Error reading file: %s (%s)".formatted(fileName, e.getMessage())));
+                CustomIO.formatError("Error reading file: %s (%s)".formatted(fileName, e.getMessage())));
         }
 
         CustomIO.printPretty("Parsing complete: %s success, %s failed".formatted(success, failed));
@@ -84,11 +84,11 @@ public class FileManager {
 
             // Open writer (auto-creates file if missing, truncates if exists)
             try (BufferedWriter writer =
-                         Files.newBufferedWriter(
-                                 path,
-                                 StandardOpenOption.CREATE,
-                                 StandardOpenOption.TRUNCATE_EXISTING,
-                                 StandardOpenOption.WRITE)) {
+                     Files.newBufferedWriter(
+                         path,
+                         StandardOpenOption.CREATE,
+                         StandardOpenOption.TRUNCATE_EXISTING,
+                         StandardOpenOption.WRITE)) {
                 for (Task task : tasks) {
                     writer.write(task.convertToLine());
                     writer.newLine();
@@ -98,7 +98,7 @@ public class FileManager {
 
         } catch (IOException e) {
             CustomIO.printPretty(
-                    CustomIO.formatError("Error saving file: " + fileName + " (" + e.getMessage() + ")"));
+                CustomIO.formatError("Error saving file: " + fileName + " (" + e.getMessage() + ")"));
         }
     }
 }

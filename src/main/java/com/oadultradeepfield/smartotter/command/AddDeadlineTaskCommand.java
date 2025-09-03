@@ -2,7 +2,6 @@ package com.oadultradeepfield.smartotter.command;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.DeadlineTask;
 import com.oadultradeepfield.smartotter.util.DateParser;
@@ -34,7 +33,7 @@ public final class AddDeadlineTaskCommand extends AddTaskCommand {
         String[] parts = input.split("/by", 2);
         if (parts.length < 2) {
             throw new SmartOtterException(
-                    "Incorrect deadline format! Use: deadline <taskName> /by <time>");
+                "Incorrect deadline format! Use: deadline <taskName> /by <time>");
         }
         String taskName = parts[0].trim();
         String deadline = parts[1].trim();
