@@ -7,28 +7,27 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class DateParserTest {
+    private static void assertDateTime(LocalDateTime actual, int... parts) {
+        int i = 0;
+        assertEquals(parts[i++], actual.getYear());
+        assertEquals(parts[i++], actual.getMonthValue());
+        assertEquals(parts[i++], actual.getDayOfMonth());
+        assertEquals(parts[i++], actual.getHour());
+        assertEquals(parts[i], actual.getMinute());
+    }
+
     @Test
     void parse_shouldReturnDateTime_whenInputHasTime() {
         Optional<LocalDateTime> result = DateParser.parse("2/12/2025 1830");
         assertTrue(result.isPresent());
-        LocalDateTime dt = result.get();
-        assertEquals(2025, dt.getYear());
-        assertEquals(2, dt.getMonthValue());
-        assertEquals(12, dt.getDayOfMonth());
-        assertEquals(18, dt.getHour());
-        assertEquals(30, dt.getMinute());
+        assertDateTime(result.get(), 2025, 2, 12, 18, 30);
     }
 
     @Test
     void parse_shouldReturnStartOfDay_whenInputHasOnlyDate() {
         Optional<LocalDateTime> result = DateParser.parse("2/12/2025");
         assertTrue(result.isPresent());
-        LocalDateTime dt = result.get();
-        assertEquals(2025, dt.getYear());
-        assertEquals(2, dt.getMonthValue());
-        assertEquals(12, dt.getDayOfMonth());
-        assertEquals(0, dt.getHour());
-        assertEquals(0, dt.getMinute());
+        assertDateTime(result.get(), 2025, 2, 12, 0, 0);
     }
 
     @Test
