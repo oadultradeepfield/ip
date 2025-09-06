@@ -2,6 +2,8 @@ package com.oadultradeepfield.smartotter.component;
 
 import java.util.Objects;
 import com.oadultradeepfield.smartotter.SmartOtter;
+import com.oadultradeepfield.smartotter.SmartOtterConstant;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -58,9 +60,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.setVvalue(0.0);
-
-        // Add Enter key event handler to the text field
         userInput.setOnKeyPressed(this::handleKeyPressed);
+
+        dialogContainer.getChildren().addAll(
+            DialogBox.getSmartOtterDialog(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE, smartOtterImage)
+        );
     }
 
     /**
@@ -96,6 +100,6 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         scrollPane.layout();
-        scrollPane.setVvalue(1.0);
+        Platform.runLater(() -> scrollPane.setVvalue(1.0));
     }
 }
