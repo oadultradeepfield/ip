@@ -22,7 +22,7 @@ public abstract class AddTaskCommand implements Executable {
      * {@inheritDoc}
      */
     @Override
-    public void execute(CommandContext context) {
+    public String execute(CommandContext context) {
         context.addTask(task);
         String message =
             """
@@ -32,5 +32,6 @@ public abstract class AddTaskCommand implements Executable {
                 .formatted(task, context.tasks().size());
 
         CustomIO.printPretty(message);
+        return message;
     }
 }

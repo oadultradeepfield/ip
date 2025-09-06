@@ -37,7 +37,7 @@ public record DeleteCommand(int taskNumber) implements Executable {
      * {@inheritDoc}
      */
     @Override
-    public void execute(CommandContext context) {
+    public String execute(CommandContext context) {
         // Convert 1-based to 0-based index and use getTask()
         Optional<Task> taskToDelete = context.getTask(taskNumber - 1);
 
@@ -52,9 +52,11 @@ public record DeleteCommand(int taskNumber) implements Executable {
                     Now you have %d tasks left."""
                     .formatted(task, context.taskCount());
             CustomIO.printPretty(message);
+            return message;
         } else {
-            CustomIO.printPretty(
-                CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
+            String errorMessage = CustomIO.formatError("There is no task with number %d".formatted(taskNumber));
+            CustomIO.printPretty(errorMessage);
+            return errorMessage;
         }
     }
 }
