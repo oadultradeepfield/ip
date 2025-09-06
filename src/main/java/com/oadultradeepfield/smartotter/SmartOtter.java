@@ -72,4 +72,29 @@ public class SmartOtter {
             }
         }
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     * <p>
+     * This method parses the input as a command and executes it against the current context,
+     * returning the result as a string instead of printing to console. This allows the GUI
+     * to display the response in dialog boxes.
+     *
+     * @param input the user's input string to process as a command
+     * @return the response string to display to the user
+     */
+    public String getResponse(String input) {
+        try {
+            Executable executable = parser.parse(input);
+            String result = executable.execute(context);
+
+            fileManager.saveTasksToFile(context.tasks());
+
+            return result;
+        } catch (SmartOtterException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
+    }
 }
