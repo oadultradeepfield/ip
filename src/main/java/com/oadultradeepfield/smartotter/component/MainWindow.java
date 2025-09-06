@@ -3,6 +3,8 @@ package com.oadultradeepfield.smartotter.component;
 import java.util.Objects;
 import com.oadultradeepfield.smartotter.SmartOtter;
 import com.oadultradeepfield.smartotter.SmartOtterConstant;
+import com.oadultradeepfield.smartotter.util.CustomIO;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -86,7 +89,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText().trim();
+        String input = CustomIO.sanitizeInput(userInput.getText());
 
         if (input.isEmpty()) {
             return;
@@ -101,5 +104,11 @@ public class MainWindow extends AnchorPane {
 
         scrollPane.layout();
         Platform.runLater(() -> scrollPane.setVvalue(1.0));
+
+        if (input.equals("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }
