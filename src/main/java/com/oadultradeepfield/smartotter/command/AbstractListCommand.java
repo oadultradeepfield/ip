@@ -35,7 +35,7 @@ public abstract class AbstractListCommand implements Executable {
     }
 
     @Override
-    public void execute(CommandContext context) {
+    public String execute(CommandContext context) {
         List<Task> tasks = getTasks(context);
 
         String result =
@@ -45,8 +45,11 @@ public abstract class AbstractListCommand implements Executable {
 
         if (tasks.isEmpty()) {
             CustomIO.printPretty(emptyMessage());
+            return emptyMessage();
         } else {
-            CustomIO.printPretty(prefixMessage() + (prefixMessage().isEmpty() ? "" : "\n") + result);
+            String toPrint = prefixMessage() + (prefixMessage().isEmpty() ? "" : "\n") + result;
+            CustomIO.printPretty(toPrint);
+            return toPrint;
         }
     }
 }

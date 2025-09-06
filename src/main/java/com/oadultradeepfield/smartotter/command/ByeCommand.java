@@ -22,7 +22,8 @@ public class ByeCommand implements Executable {
      * {@inheritDoc}
      */
     @Override
-    public void execute(CommandContext context) {
+    public String execute(CommandContext context) {
         CustomIO.printPretty(SmartOtterConstant.FAREWELL_MESSAGE);
+        return SmartOtterConstant.FAREWELL_MESSAGE;
     }
 }

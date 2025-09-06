@@ -10,6 +10,7 @@ public interface Executable {
      * Executes the command using the provided context.
      *
      * @param context the execution context
+     * @return the string representation of the printed text
      */
-    void execute(CommandContext context) throws SmartOtterException;
+    String execute(CommandContext context) throws SmartOtterException;
 }

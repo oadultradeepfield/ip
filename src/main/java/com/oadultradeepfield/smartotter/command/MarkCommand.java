@@ -37,17 +37,21 @@ public record MarkCommand(int taskNumber) implements Executable {
      * {@inheritDoc}
      */
     @Override
-    public void execute(CommandContext context) {
+    public String execute(CommandContext context) {
         // Convert 1-based to 0-based index and use getTask()
         Optional<Task> taskToMark = context.getTask(taskNumber - 1);
 
         if (taskToMark.isPresent()) {
             Task task = taskToMark.get();
             task.setDone(true);
-            CustomIO.printPretty("Great work! I have marked the task as done!\n%s".formatted(task));
+
+            String message = "Great work! I have marked the task as done!\n%s".formatted(task);
+            CustomIO.printPretty(message);
+            return message;
         } else {
-            CustomIO.printPretty(
-                CustomIO.formatError("There is no task with number %d".formatted(taskNumber)));
+            String errorMessage = CustomIO.formatError("There is no task with number %d".formatted(taskNumber));
+            CustomIO.printPretty(errorMessage);
+            return errorMessage;
         }
     }
 }
