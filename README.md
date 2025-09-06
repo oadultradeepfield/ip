@@ -45,3 +45,14 @@ that `dos2unix` is installed so that the script can be executed correctly.
 
 **Warning:** Keep the `src/main/java` folder as the root for Java files (do not rename these folders or move Java files
 outside this path), as some tools (e.g., Gradle) expect this standard structure.
+
+## Changelog
+
+### [2025-09-06] - Project Update
+
+- Migrated the project to **Gradle** for simplified build and dependency management.
+- Integrated **JavaFX** for a graphical user interface (GUI).
+- Added basic **GUI support**, including text input, message display, and send button.
+
+![SmartOtter GUI](gui.png)
+
