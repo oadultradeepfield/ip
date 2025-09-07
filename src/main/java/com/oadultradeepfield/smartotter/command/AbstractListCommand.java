@@ -36,6 +36,8 @@ public abstract class AbstractListCommand implements Executable {
 
     @Override
     public String execute(CommandContext context) {
+        assert context != null : "Context cannot be null";
+
         List<Task> tasks = getTasks(context);
 
         String result =

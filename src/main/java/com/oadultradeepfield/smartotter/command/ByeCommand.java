@@ -23,6 +23,8 @@ public class ByeCommand implements Executable {
      */
     @Override
     public String execute(CommandContext context) {
+        assert context != null : "Context cannot be null";
+
         CustomIO.printPretty(SmartOtterConstant.FAREWELL_MESSAGE);
         return SmartOtterConstant.FAREWELL_MESSAGE;
     }
