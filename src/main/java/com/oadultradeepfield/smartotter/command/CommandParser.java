@@ -38,19 +38,21 @@ public class CommandParser {
             }
         }
 
+        String commandName = type.name().toLowerCase();
+
         // Commands that do not take arguments
         Set<String> noArgCommands = Set.of("bye", "list", "today");
-        if (noArgCommands.contains(commandWord)) {
+        if (noArgCommands.contains(commandName)) {
             if (parts.length > 1) {
                 throw new SmartOtterException(
-                    "Command '%s' does not take any arguments".formatted(commandWord));
+                    "Command '%s' does not take any arguments".formatted(commandName));
             }
             return type.create("");
         }
 
         // Commands that require arguments
         if (parts.length < 2) {
-            throw new SmartOtterException("Command '%s' requires one argument".formatted(commandWord));
+            throw new SmartOtterException("Command '%s' requires one argument".formatted(commandName));
         }
 
         return type.create(parts[1]);
