@@ -48,7 +48,7 @@ outside this path), as some tools (e.g., Gradle) expect this standard structure.
 
 ## Changelog
 
-### [2025-09-06] - Project Update
+### [2025-09-06] - GUI Update
 
 - Migrated the project to **Gradle** for simplified build and dependency management.
 - Integrated **JavaFX** for a graphical user interface (GUI).
@@ -56,3 +56,10 @@ outside this path), as some tools (e.g., Gradle) expect this standard structure.
 
 ![SmartOtter GUI](gui.png)
 
+### [2025-09-07] - Support Minor Typos in Commands
+
+* Added fuzzy matching for command keywords in `CommandParser` to tolerate minor typos (up to 2 edits).
+* Introduced `FuzzyMatcher` utility implementing Levenshtein distance for approximate string matching.
+* Added `CommandType.allKeywords()` to provide all command keywords for fuzzy matching.
+* Commands now correctly recognize input with small typos, improving usability (e.g., `"fnd"` → `"find"`, `"lits"` → `"list"`).
+* Maintains existing argument validation and no-argument command handling.
