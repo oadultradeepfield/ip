@@ -13,6 +13,7 @@ public class DateParser {
     private static final DateTimeFormatter INPUT_WIH_TIME =
         DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
     private static final DateTimeFormatter INPUT_DATE_ONLY = DateTimeFormatter.ofPattern("M/d/yyyy");
+
     private static final DateTimeFormatter OUTPUT_WITH_TIME =
         DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm");
     private static final DateTimeFormatter OUTPUT_DATE_ONLY =

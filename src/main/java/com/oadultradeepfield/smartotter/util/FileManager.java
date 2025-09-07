@@ -37,6 +37,7 @@ public class FileManager {
      */
     public List<Task> readTasksFromFile() {
         List<Task> tasks = new ArrayList<>();
+
         int success = 0;
         int failed = 0;
 
@@ -47,9 +48,11 @@ public class FileManager {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
+
             while ((line = reader.readLine()) != null) {
                 try {
                     Optional<Task> task = TaskParser.parse(line);
+
                     if (task.isPresent()) {
                         tasks.add(task.get());
                         success++;
@@ -93,6 +96,7 @@ public class FileManager {
                     writer.write(task.convertToLine());
                     writer.newLine();
                 }
+
                 CustomIO.printPretty("Tasks saved to %s successfully 🐟".formatted(fileName));
             }
 
