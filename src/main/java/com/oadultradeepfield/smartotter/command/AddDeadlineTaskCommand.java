@@ -31,17 +31,21 @@ public final class AddDeadlineTaskCommand extends AddTaskCommand {
      */
     public static Executable fromInput(String input) throws SmartOtterException {
         String[] parts = input.split("/by", 2);
+
         if (parts.length < 2) {
             throw new SmartOtterException(
                 "Incorrect deadline format! Use: deadline <taskName> /by <time>");
         }
+
         String taskName = parts[0].trim();
         String deadline = parts[1].trim();
+
         if (taskName.isEmpty() || deadline.isEmpty()) {
             throw new SmartOtterException("Task name and deadline cannot be empty");
         }
 
         Optional<LocalDateTime> parseDeadline = DateParser.parse(deadline);
+
         if (parseDeadline.isEmpty()) {
             throw new SmartOtterException("Deadline is not in a valid date and time format");
         }

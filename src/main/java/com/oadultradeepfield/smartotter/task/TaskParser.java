@@ -28,6 +28,7 @@ public class TaskParser {
 
         String type = parts[0];
         int status;
+
         try {
             status = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
