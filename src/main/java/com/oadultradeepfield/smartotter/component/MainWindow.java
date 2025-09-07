@@ -1,9 +1,11 @@
 package com.oadultradeepfield.smartotter.component;
 
 import java.util.Objects;
+
 import com.oadultradeepfield.smartotter.SmartOtter;
 import com.oadultradeepfield.smartotter.SmartOtterConstant;
 import com.oadultradeepfield.smartotter.util.CustomIO;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -24,14 +26,15 @@ public class MainWindow extends AnchorPane {
     /**
      * Image displayed for user messages in dialog boxes
      */
-    private final Image userImage = new Image(
-        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
+    private final Image userImage =
+        new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
 
     /**
      * Image displayed for SmartOtter messages in dialog boxes
      */
-    private final Image smartOtterImage = new Image(
-        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/smart_otter.png")));
+    private final Image smartOtterImage =
+        new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/smart_otter.png")));
 
     @FXML
     private ScrollPane scrollPane;
@@ -57,22 +60,23 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initializes the controller after FXML loading.
-     * Sets the scroll pane to start at the top and adds Enter key support.
+     * Initializes the controller after FXML loading. Sets the scroll pane to start at the top and
+     * adds Enter key support.
      */
     @FXML
     public void initialize() {
         scrollPane.setVvalue(0.0);
         userInput.setOnKeyPressed(this::handleKeyPressed);
 
-        dialogContainer.getChildren().addAll(
-            DialogBox.getSmartOtterDialog(SmartOtterConstant.GREETING_MESSAGE_TEMPLATE, smartOtterImage)
-        );
+        dialogContainer
+            .getChildren()
+            .addAll(
+                DialogBox.getSmartOtterDialog(
+                    SmartOtterConstant.GREETING_MESSAGE_TEMPLATE, smartOtterImage));
     }
 
     /**
-     * Handles key press events on the user input field.
-     * Submits input when Enter key is pressed.
+     * Handles key press events on the user input field. Submits input when Enter key is pressed.
      *
      * @param event the key event
      */
@@ -83,9 +87,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing SmartOtter's reply and
-     * then appends them to the dialog container. Clears the user input after processing.
-     * Does nothing if the input is empty or contains only whitespace.
+     * Creates two dialog boxes, one echoing user input and the other containing SmartOtter's reply
+     * and then appends them to the dialog container. Clears the user input after processing. Does
+     * nothing if the input is empty or contains only whitespace.
      */
     @FXML
     private void handleUserInput() {
@@ -96,10 +100,11 @@ public class MainWindow extends AnchorPane {
         }
 
         String response = smartOtter.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getSmartOtterDialog(response, smartOtterImage)
-        );
+        dialogContainer
+            .getChildren()
+            .addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getSmartOtterDialog(response, smartOtterImage));
         userInput.clear();
 
         scrollPane.layout();

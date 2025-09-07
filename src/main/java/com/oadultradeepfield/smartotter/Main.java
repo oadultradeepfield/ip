@@ -1,7 +1,9 @@
 package com.oadultradeepfield.smartotter;
 
 import java.io.IOException;
+
 import com.oadultradeepfield.smartotter.component.MainWindow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

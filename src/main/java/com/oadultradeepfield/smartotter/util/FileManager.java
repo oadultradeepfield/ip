@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.task.TaskParser;
@@ -92,14 +93,15 @@ public class FileManager {
                          StandardOpenOption.WRITE)) {
                 tasks.stream()
                     .map(Task::convertToLine)
-                    .forEach(line -> {
-                        try {
-                            writer.write(line);
-                            writer.newLine();
-                        } catch (IOException e) {
-                            throw new UncheckedIOException(e);
-                        }
-                    });
+                    .forEach(
+                        line -> {
+                            try {
+                                writer.write(line);
+                                writer.newLine();
+                            } catch (IOException e) {
+                                throw new UncheckedIOException(e);
+                            }
+                        });
 
                 CustomIO.printPretty("Tasks saved to %s successfully 🐟".formatted(fileName));
             }
