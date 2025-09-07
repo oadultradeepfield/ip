@@ -32,17 +32,20 @@ public final class AddEventTaskCommand extends AddTaskCommand {
      */
     public static Executable fromInput(String input) throws SmartOtterException {
         String[] fromSplit = input.split("/from", 2);
+
         if (fromSplit.length < 2) {
             throw new SmartOtterException(
                 "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
         }
-        String taskName = fromSplit[0].trim();
 
+        String taskName = fromSplit[0].trim();
         String[] toSplit = fromSplit[1].split("/to", 2);
+
         if (toSplit.length < 2) {
             throw new SmartOtterException(
                 "Incorrect event format! Use: event <taskName> /from <start> /to <end>");
         }
+
         String from = toSplit[0].trim();
         String to = toSplit[1].trim();
 
@@ -52,6 +55,7 @@ public final class AddEventTaskCommand extends AddTaskCommand {
 
         Optional<LocalDateTime> parsedFrom = DateParser.parse(from);
         Optional<LocalDateTime> parsedTo = DateParser.parse(to);
+
         if (parsedFrom.isEmpty() || parsedTo.isEmpty()) {
             throw new SmartOtterException("Start and end time is not in a valid date and time format.");
         }

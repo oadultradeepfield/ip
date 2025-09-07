@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,6 +37,7 @@ public class FileManager {
      */
     public List<Task> readTasksFromFile() {
         List<Task> tasks = new ArrayList<>();
+
         int success = 0;
         int failed = 0;
 
@@ -48,9 +48,11 @@ public class FileManager {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
+
             while ((line = reader.readLine()) != null) {
                 try {
                     Optional<Task> task = TaskParser.parse(line);
+
                     if (task.isPresent()) {
                         tasks.add(task.get());
                         success++;
@@ -90,16 +92,11 @@ public class FileManager {
                          StandardOpenOption.CREATE,
                          StandardOpenOption.TRUNCATE_EXISTING,
                          StandardOpenOption.WRITE)) {
-                tasks.stream()
-                    .map(Task::convertToLine)
-                    .forEach(line -> {
-                        try {
-                            writer.write(line);
-                            writer.newLine();
-                        } catch (IOException e) {
-                            throw new UncheckedIOException(e);
-                        }
-                    });
+                for (Task task : tasks) {
+                    writer.write(task.convertToLine());
+                    writer.newLine();
+                }
+
                 CustomIO.printPretty("Tasks saved to %s successfully 🐟".formatted(fileName));
             }
 

@@ -36,6 +36,8 @@ public abstract class AbstractListCommand implements Executable {
 
     @Override
     public String execute(CommandContext context) {
+        assert context != null : "Context cannot be null";
+
         List<Task> tasks = getTasks(context);
 
         String result =
@@ -47,9 +49,9 @@ public abstract class AbstractListCommand implements Executable {
             CustomIO.printPretty(emptyMessage());
             return emptyMessage();
         } else {
-            String toPrint = prefixMessage() + (prefixMessage().isEmpty() ? "" : "\n") + result;
-            CustomIO.printPretty(toPrint);
-            return toPrint;
+            String message = prefixMessage() + (prefixMessage().isEmpty() ? "" : "\n") + result;
+            CustomIO.printPretty(message);
+            return message;
         }
     }
 }

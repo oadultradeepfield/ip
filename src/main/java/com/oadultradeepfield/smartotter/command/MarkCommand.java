@@ -38,6 +38,8 @@ public record MarkCommand(int taskNumber) implements Executable {
      */
     @Override
     public String execute(CommandContext context) {
+        assert context != null : "Context cannot be null";
+
         // Convert 1-based to 0-based index and use getTask()
         Optional<Task> taskToMark = context.getTask(taskNumber - 1);
 

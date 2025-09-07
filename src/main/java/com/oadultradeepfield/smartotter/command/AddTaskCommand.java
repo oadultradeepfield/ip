@@ -23,6 +23,8 @@ public abstract class AddTaskCommand implements Executable {
      */
     @Override
     public String execute(CommandContext context) {
+        assert context != null : "Context cannot be null";
+
         context.addTask(task);
         String message =
             """
