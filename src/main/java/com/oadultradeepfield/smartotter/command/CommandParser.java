@@ -2,6 +2,7 @@ package com.oadultradeepfield.smartotter.command;
 
 import java.util.Set;
 import com.oadultradeepfield.smartotter.SmartOtterException;
+import com.oadultradeepfield.smartotter.util.CustomIO;
 
 /**
  * Parses user input into corresponding {@link Executable} instances.
@@ -16,6 +17,9 @@ public class CommandParser {
      *                             invalid for the matched command
      */
     public Executable parse(String input) throws SmartOtterException {
+        assert input.equals(CustomIO.sanitizeInput(input))
+            : "Input should be sanitized before parsing";
+
         String[] parts = input.split(" ", 2); // Split into maximum 2 parts;
         String commandWord = parts[0].toLowerCase();
 
