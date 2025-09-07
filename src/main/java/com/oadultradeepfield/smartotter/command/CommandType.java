@@ -1,6 +1,8 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
@@ -44,6 +46,19 @@ public enum CommandType {
 
     public Executable create(String input) throws SmartOtterException {
         return factory.create(input);
+    }
+
+    /**
+     * Returns all command keywords for fuzzy matching.
+     */
+    public static Set<String> allKeywords() {
+        return Arrays.stream(values())
+            .map(CommandType::keyword)
+            .collect(Collectors.toSet());
+    }
+
+    private String keyword() {
+        return keyword;
     }
 
     @FunctionalInterface

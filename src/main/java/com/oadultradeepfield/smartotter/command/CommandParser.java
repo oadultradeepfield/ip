@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.util.CustomIO;
+import com.oadultradeepfield.smartotter.util.FuzzyMatcher;
 
 /**
  * Parses user input into corresponding {@link Executable} instances.
@@ -26,9 +27,15 @@ public class CommandParser {
         CommandType type = CommandType.fromKeyword(commandWord);
 
         if (type == null) {
-            throw new SmartOtterException(
-                "Unknown command: '%s'.\nI am not smart enough to understand,\nplease try again."
-                    .formatted(commandWord));
+            // Try fuzzy match
+            Set<String> keywords = CommandType.allKeywords();
+            String match = fuzzyMatchCommand(commandWord, keywords);
+            if (match != null) {
+                type = CommandType.fromKeyword(match);
+            } else {
+                throw new SmartOtterException(
+                    "Unknown command: '%s'. Please try again.".formatted(commandWord));
+            }
         }
 
         // Commands that do not take arguments
@@ -47,5 +54,18 @@ public class CommandParser {
         }
 
         return type.create(parts[1]);
+    }
+
+    private String fuzzyMatchCommand(String input, Set<String> commands) {
+        String bestMatch = null;
+
+        for (String cmd : commands) {
+            if (FuzzyMatcher.isMatched(cmd, input)) {
+                bestMatch = cmd;
+                break;
+            }
+        }
+
+        return bestMatch;
     }
 }
