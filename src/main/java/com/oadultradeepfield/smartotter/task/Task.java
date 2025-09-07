@@ -5,7 +5,7 @@ package com.oadultradeepfield.smartotter.task;
  */
 public abstract class Task {
     private final String taskName;
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates a new task with the given name, initially not done.
@@ -43,12 +43,12 @@ public abstract class Task {
      * Returns a string representation of the task, showing its completion status in the format:
      *
      * <pre>[X] TaskName</pre>
-     * <p>
-     * or
+     *
+     * <p>or
      *
      * <pre>[ ] TaskName</pre>
-     * <p>
-     * .
+     *
+     * <p>.
      *
      * @return a string representation of the task
      */
@@ -64,6 +64,15 @@ public abstract class Task {
      */
     public String convertToLine() {
         return "%s | %s".formatted(isDone ? "1" : "0", taskName);
+    }
+
+    /**
+     * Getter method for task done status
+     *
+     * @return a boolean indicating whether a task is completed
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

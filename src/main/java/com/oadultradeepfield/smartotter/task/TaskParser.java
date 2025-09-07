@@ -2,6 +2,7 @@ package com.oadultradeepfield.smartotter.task;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.util.DateParser;
 
@@ -77,14 +78,19 @@ public class TaskParser {
      * @param deadlineOrTo   the end time (for Event), may be {@code null}
      * @return the created {@link Task}, or {@code null} if type is unknown
      */
-    public static Optional<Task> createTask(String type, int status, String taskName, LocalDateTime deadlineOrFrom,
-                                            LocalDateTime deadlineOrTo) {
-        Task task = switch (type) {
+    public static Optional<Task> createTask(
+        String type,
+        int status,
+        String taskName,
+        LocalDateTime deadlineOrFrom,
+        LocalDateTime deadlineOrTo) {
+        Task task =
+            switch (type) {
             case "T" -> new ToDoTask(taskName);
             case "D" -> new DeadlineTask(taskName, deadlineOrFrom);
             case "E" -> new EventTask(taskName, deadlineOrFrom, deadlineOrTo);
             default -> null;
-        };
+            };
 
         if (task != null && status == 1) {
             task.setDone(true);

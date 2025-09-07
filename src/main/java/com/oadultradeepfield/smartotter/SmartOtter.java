@@ -17,11 +17,10 @@ public class SmartOtter {
 
     /**
      * Constructs a new {@code SmartOtter} instance.
-     * <p>
-     * This initializes the user interface, file manager, command parser, and
-     * command context using the tasks loaded from the specified file.
-     * A shutdown hook is also registered to automatically save tasks back to the file
-     * when the program exits.
+     *
+     * <p>This initializes the user interface, file manager, command parser, and command context using
+     * the tasks loaded from the specified file. A shutdown hook is also registered to automatically
+     * save tasks back to the file when the program exits.
      *
      * @param filePath the path to the file where tasks are stored and retrieved
      */
@@ -45,12 +44,12 @@ public class SmartOtter {
 
     /**
      * Starts the main execution loop of the {@code SmartOtter} application.
-     * <p>
-     * This method displays a greeting, then continuously reads user input, parses it into
-     * a command, and executes it against the current context. The loop continues until a
-     * {@code ByeCommand} is executed.
-     * <p>
-     * Errors specific to the application are caught and shown as messages, while all other
+     *
+     * <p>This method displays a greeting, then continuously reads user input, parses it into a
+     * command, and executes it against the current context. The loop continues until a {@code
+     * ByeCommand} is executed.
+     *
+     * <p>Errors specific to the application are caught and shown as messages, while all other
      * unexpected exceptions are displayed as errors.
      */
     public void run() {
@@ -75,10 +74,10 @@ public class SmartOtter {
 
     /**
      * Generates a response for the user's chat message.
-     * <p>
-     * This method parses the input as a command and executes it against the current context,
-     * returning the result as a string instead of printing to console. This allows the GUI
-     * to display the response in dialog boxes.
+     *
+     * <p>This method parses the input as a command and executes it against the current context,
+     * returning the result as a string instead of printing to console. This allows the GUI to display
+     * the response in dialog boxes.
      *
      * @param input the user's input string to process as a command
      * @return the response string to display to the user

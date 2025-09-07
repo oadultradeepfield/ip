@@ -24,7 +24,7 @@ public class DateParser {
      *
      * @param input the date string to parse, e.g., "2/12/2019" or "2/12/2019 1800"
      * @return an {@link Optional} containing the parsed {@link LocalDateTime}, or empty if the input
-     * cannot be parsed
+     *      cannot be parsed
      */
     public static Optional<LocalDateTime> parse(String input) {
         try {

@@ -1,6 +1,7 @@
 package com.oadultradeepfield.smartotter;
 
 import java.util.Scanner;
+
 import com.oadultradeepfield.smartotter.util.CustomIO;
 
 /**

@@ -2,6 +2,7 @@ package com.oadultradeepfield.smartotter.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import com.oadultradeepfield.smartotter.util.DateParser;
 
 /**
@@ -37,8 +38,8 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "%s (from: %s, to: %s)"
-            .formatted(super.toString(), DateParser.format(startDateTime), DateParser.format(endDateTime));
+        return "%s (from: %s, to: %s)".formatted(super.toString(), DateParser.format(startDateTime),
+            DateParser.format(endDateTime));
     }
 
     /**
@@ -46,11 +47,8 @@ public class EventTask extends Task {
      */
     @Override
     public String convertToLine() {
-        return "E | %s | %s | %s"
-            .formatted(
-                super.convertToLine(),
-                DateParser.formatForLine(startDateTime),
-                DateParser.formatForLine(endDateTime));
+        return "E | %s | %s | %s".formatted(super.convertToLine(), DateParser.formatForLine(startDateTime),
+            DateParser.formatForLine(endDateTime));
     }
 
     /**

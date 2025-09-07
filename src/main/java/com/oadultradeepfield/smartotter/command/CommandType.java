@@ -1,8 +1,14 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Arrays;
+
 import com.oadultradeepfield.smartotter.SmartOtterException;
 
+/**
+ * Enum representing all supported command types in SmartOtter.
+ * Each command type is associated with a keyword and a factory
+ * method to create its corresponding {@link Executable} instance.
+ */
 public enum CommandType {
     TODO("todo", AddTodoCommand::fromInput),
     DEADLINE("deadline", AddDeadlineTaskCommand::fromInput),
@@ -23,6 +29,12 @@ public enum CommandType {
         this.factory = factory;
     }
 
+    /**
+     * Returns the {@link CommandType} corresponding to the given keyword.
+     *
+     * @param keyword the command keyword to look up
+     * @return the matching {@link CommandType}, or null if no match is found
+     */
     public static CommandType fromKeyword(String keyword) {
         return Arrays.stream(values())
             .filter(cmd -> cmd.keyword.equalsIgnoreCase(keyword))

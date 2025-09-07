@@ -1,6 +1,7 @@
 package com.oadultradeepfield.smartotter.command;
 
 import java.util.Optional;
+
 import com.oadultradeepfield.smartotter.SmartOtterException;
 import com.oadultradeepfield.smartotter.task.Task;
 import com.oadultradeepfield.smartotter.util.CustomIO;
@@ -51,7 +52,8 @@ public record UnmarkCommand(int taskNumber) implements Executable {
             CustomIO.printPretty(message);
             return message;
         } else {
-            String errorMessage = CustomIO.formatError("There is no task with number %d".formatted(taskNumber));
+            String errorMessage =
+                CustomIO.formatError("There is no task with number %d".formatted(taskNumber));
             CustomIO.printPretty(errorMessage);
             return errorMessage;
         }
