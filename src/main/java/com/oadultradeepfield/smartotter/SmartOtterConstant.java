@@ -28,6 +28,12 @@ public final class SmartOtterConstant {
      */
     public static final String SAVE_PATH = "./data/smart_otter.txt";
 
+    /**
+     * Default maximum Levenshtein distance for fuzzy string matching.
+     * Allows up to 3 character differences (typos, insertions, deletions).
+     */
+    public static final int DEFAULT_FUZZY_MATCH_DISTANCE = 3;
+
     // Prevents instantiation
     private SmartOtterConstant() {
     }
