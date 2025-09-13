@@ -3,10 +3,10 @@
     -fx-text-fill: #2d2d2d;
     -fx-font: 16px "Inter";
     -fx-padding: 10px 14px;
-    -fx-background-radius: 16px;
+    -fx-background-radius: 16px 16px 4px 16px;
     -fx-border-color: #cdd7d2;
     -fx-border-width: 1px;
-    -fx-border-radius: 16px;
+    -fx-border-radius: 16px 16px 4px 16px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 4, 0.2, 0, 2);
 }
 
@@ -15,10 +15,10 @@
     -fx-text-fill: #2d2d2d;
     -fx-font: 16px "Inter";
     -fx-padding: 10px 14px;
-    -fx-background-radius: 16px;
+    -fx-background-radius: 16px 16px 16px 4px;
     -fx-border-color: #cdd7d2;
     -fx-border-width: 1px;
-    -fx-border-radius: 16px;
+    -fx-border-radius: 16px 16px 16px 4px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 4, 0.2, 0, 2);
 }
 
