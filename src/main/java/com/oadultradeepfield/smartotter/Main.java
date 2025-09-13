@@ -1,6 +1,8 @@
 package com.oadultradeepfield.smartotter;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.oadultradeepfield.smartotter.component.MainWindow;
 
@@ -19,6 +21,8 @@ public class Main extends Application {
     private static final int MIN_HEIGHT = 220;
     private static final int MIN_WIDTH = 417;
     private static final String APP_NAME = "SmartOtter";
+
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     /**
      * Starts the JavaFX application by loading the main window and setting up the stage.
@@ -41,7 +45,7 @@ public class Main extends Application {
 
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to load main window FXML", e);
         }
     }
 }

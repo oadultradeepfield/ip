@@ -2,6 +2,8 @@ package com.oadultradeepfield.smartotter.component;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Logger LOGGER = Logger.getLogger(DialogBox.class.getName());
+
     @FXML
     private Label dialog;
     @FXML
@@ -37,7 +41,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to load main window FXML", e);
         }
 
         dialog.setText(text);
