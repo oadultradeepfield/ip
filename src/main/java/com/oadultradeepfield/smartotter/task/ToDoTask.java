@@ -4,7 +4,6 @@ package com.oadultradeepfield.smartotter.task;
  * A {@link Task} representing a to-do item.
  */
 public class ToDoTask extends Task {
-
     /**
      * Creates a to-do task with the given name.
      *

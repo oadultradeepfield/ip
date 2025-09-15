@@ -33,7 +33,7 @@ public class CustomIO {
     }
 
     /**
-     * Get error messages with emoji prefix.
+     * Gets error messages with emoji prefix.
      *
      * @param input the error message to display
      */

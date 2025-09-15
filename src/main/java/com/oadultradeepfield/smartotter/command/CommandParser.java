@@ -11,7 +11,7 @@ import com.oadultradeepfield.smartotter.util.FuzzyMatcher;
  */
 public class CommandParser {
     /**
-     * * Parses the given input string and returns the corresponding {@link Executable}.
+     * Parses the given input string and returns the corresponding {@link Executable}.
      *
      * @param input the raw user input
      * @return the parsed command

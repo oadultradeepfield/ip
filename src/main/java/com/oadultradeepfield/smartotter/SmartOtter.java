@@ -36,7 +36,7 @@ public class SmartOtter {
     }
 
     /**
-     * Entry point. Runs interactive loop until user exits.
+     * Runs interactive loop until user exits.
      */
     public static void main(String[] args) {
         new SmartOtter(SmartOtterConstant.SAVE_PATH).run();

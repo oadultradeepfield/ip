@@ -30,11 +30,6 @@ public abstract class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
-    /**
-     * Getter method for the name of the task
-     *
-     * @return a string representation of task name
-     */
     public String getTaskName() {
         return this.taskName;
     }
@@ -58,7 +53,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert a task to its line representation for saving as text file
+     * Converts a task to its line representation for saving as text file
      *
      * @return a line representation of a task
      */
@@ -66,11 +61,6 @@ public abstract class Task {
         return "%s | %s".formatted(isDone ? "1" : "0", taskName);
     }
 
-    /**
-     * Getter method for task done status
-     *
-     * @return a boolean indicating whether a task is completed
-     */
     public boolean isDone() {
         return isDone;
     }

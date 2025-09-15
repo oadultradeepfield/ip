@@ -20,14 +20,14 @@ public abstract class AbstractListCommand implements Executable {
     protected abstract List<Task> getTasks(CommandContext context);
 
     /**
-     * Message shown if there are no tasks to display.
+     * Returns the message shown when there are no tasks to display.
      *
      * @return the empty message
      */
     protected abstract String emptyMessage();
 
     /**
-     * Optional prefix shown before listing tasks (e.g., "Here are the matching tasks I found:")
+     * Returns the optional prefix shown before listing tasks (e.g., "Here are the matching tasks I found:")
      *
      * @return the prefix string (can be empty)
      */
